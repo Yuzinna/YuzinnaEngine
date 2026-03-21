@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ugina::Camera" Collapsed="true">
+    <Position X="2.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAAAAAAAQBAQAAAIAAAQAAACAAAABAAABAAACA=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaCamera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ugina::GameObject" Collapsed="true">
+    <Position X="18.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAAAAAAAAIAQAAAoAAJAAAAAAAAAAAABAAAAIAAAA=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaGameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ugina::Component" Collapsed="true">
+    <Position X="6.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQggAAIAAAAAQAAAAAAIBAAAAAAAAEAABBCAAAAAAA=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaComponent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ugina::Entity" Collapsed="true">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAgEQAAAAAA=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaEntity.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ugina::Input" Collapsed="true">
+    <Position X="20" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAIAAAAAgIAQACAEAAAAwAKAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaInput.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ugina::Layer" Collapsed="true">
+    <Position X="11.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AARAAAQAAIAAAQAAAAAAIAAAAAAAAAAEABAAAAAAAAA=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaLayer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ugina::Resource" Collapsed="true">
+    <Position X="14" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAIAAAAAAAAAAIABAAAAACIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaResource.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ugina::Resources" Collapsed="true">
+    <Position X="16.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAIAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaResources.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ugina::Scene" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AARAAAAAAEAAAQAAgAAAIAAAQAAQAAAABJAAAAAAAAA=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaScene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ugina::SceneManager" Collapsed="true">
+    <Position X="18.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAQAAAAAQAAAAAAKAAAAAAAAEgAABAAACAAAAA=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaSceneManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ugina::Script" Collapsed="true">
+    <Position X="7.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAQAAAAAAIAAAAAAAAAAAABAAAAAhAAA=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaScript.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ugina::SpriteRenderer" Collapsed="true">
+    <Position X="9.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQQAAAAAAAAAQBAAAAIIAAAACAAAAAAABAAAAAAIAA=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaSpriteRenderer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ugina::Time" Collapsed="true">
+    <Position X="20" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAECABAAAAAAAAAAAAAAACABAAAAEAAAI=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaTime.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ugina::Transform" Collapsed="true">
+    <Position X="5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAQAAAAAAIAQAAAAAAgAAABAAAAAAAoA=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaTransform.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ugina::Application" Collapsed="true">
+    <Position X="16.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAAQCBAABQFAQAAgIQAAAAACQAAAABEAAEQAAAI=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaApplication.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ugina::graphics::Texture" Collapsed="true">
+    <Position X="14" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAgAAQAAAAhAAAABAAABBAABAEAAAAAAIAAEQAAAI=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaTexture.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="ugina::math::Vector2" Collapsed="true">
+    <Position X="16.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAQAAAAAAAABgAAAAAIA=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaMath.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="ugina::keyState" Collapsed="true">
+    <Position X="18.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAEEAAI=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaInput.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ugina::keyCode" Collapsed="true">
+    <Position X="16.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAvv//YQE=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaInput.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ugina::enums::eComponentType" Collapsed="true">
+    <Position X="16.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAICAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAgIAA=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaEnums.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ugina::enums::eLayerType" Collapsed="true">
+    <Position X="18.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAgAAAAAAAAAAAAAAAAAQEAAAA=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaEnums.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ugina::enums::eResourceType" Collapsed="true">
+    <Position X="20" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAQAAAAAAAAAAIIAAAAAAAA=</HashCode>
+      <FileName>C:\Practice\SinceWin\UginaEngine\UginaEngine_SOURCE\uginaEnums.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>

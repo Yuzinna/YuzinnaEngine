@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaEntity.cpp">
+      <Filter>Commons</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaGameObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaSceneManager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaMath.cpp">
+      <Filter>Commons</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaTime.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaInput.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaApplication.cpp">
+      <Filter>High Level Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaCamera.cpp">
+      <Filter>Components\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaScript.cpp">
+      <Filter>Components\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaTransform.cpp">
+      <Filter>Components\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaSpriteRenderer.cpp">
+      <Filter>Components\Spriterenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaLayer.cpp">
+      <Filter>Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaResource.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaResources.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaTexture.cpp">
+      <Filter>Resources\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaComponent.cpp">
+      <Filter>Components\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaBoxCollider2D.cpp">
+      <Filter>Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaCircleCollider2D.cpp">
+      <Filter>Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaCollider.cpp">
+      <Filter>Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaTilemapRenderer.cpp">
+      <Filter>Components\TileMapRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaDontDestroyOnLoad.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaRigidbody.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaAnimation.cpp">
+      <Filter>Components\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaAnimator.cpp">
+      <Filter>Components\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaCollisionManager.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
+      <Filter>Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaEntity.h">
+      <Filter>Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaGameObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaSceneManager.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaMath.h">
+      <Filter>Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaTime.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaInput.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaApplication.h">
+      <Filter>High Level Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaEnums.h">
+      <Filter>Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaCamera.h">
+      <Filter>Components\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaScript.h">
+      <Filter>Components\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaTransform.h">
+      <Filter>Components\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaSpriteRenderer.h">
+      <Filter>Components\Spriterenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaLayer.h">
+      <Filter>Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaResources.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaTexture.h">
+      <Filter>Resources\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaComponent.h">
+      <Filter>Components\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaBoxCollider2D.h">
+      <Filter>Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaCircleCollider2D.h">
+      <Filter>Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaCollider.h">
+      <Filter>Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaTilemapRenderer.h">
+      <Filter>Components\TileMapRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaDontDestroyOnLoad.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaRigidbody.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaAnimation.h">
+      <Filter>Components\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaAnimator.h">
+      <Filter>Components\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaCollisionManager.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Commons">
+      <UniqueIdentifier>{fcf9af2d-7c97-4fde-a526-2fe6f48d519a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{66010d0f-7324-4c8b-b989-2630b32d3450}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{5da416f8-bb34-44a9-8078-de1b725ba2ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{74151802-0220-45ed-a5b2-057146dfc477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{d6b4a04b-0efe-4e1c-94d9-8457ecf19f34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{ed9fa73c-64fc-4fd1-804a-90de31f74ea8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Camera">
+      <UniqueIdentifier>{b5552037-650c-4668-afee-ff64dedca0bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Component">
+      <UniqueIdentifier>{97084863-a34f-47e3-8e66-d3fe10d1b8c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Spriterenderer">
+      <UniqueIdentifier>{24060356-2dec-4a16-b958-9dadf788c288}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Transform">
+      <UniqueIdentifier>{6acb032f-b2e8-4b35-a295-6705aed7e114}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Script">
+      <UniqueIdentifier>{69105973-bb4b-44fe-93c2-f49b63892bb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Layer">
+      <UniqueIdentifier>{e963f14f-ad86-4f57-ba5f-84127be6ec74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{71c48dcc-751a-4606-80e3-28338be058df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Texture">
+      <UniqueIdentifier>{e91714a3-d5a8-4699-bb32-9dbf8b64954e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="High Level Interface">
+      <UniqueIdentifier>{a911bf7c-d1f0-4e45-8985-13293ef6fa65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Collider">
+      <UniqueIdentifier>{c4549c1c-190f-41b0-b2f8-71d082a75e10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\TileMapRenderer">
+      <UniqueIdentifier>{6e44d52a-112d-4dcc-80bc-cf0b57d421c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{46c1bb1d-c84e-427c-8625-1ad51129480a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Animator">
+      <UniqueIdentifier>{538e7e30-1035-4740-9531-324e6cc932d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{a0e4eb31-9a6b-480a-9da1-e416703c6de2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

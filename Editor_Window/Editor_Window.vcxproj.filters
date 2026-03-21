@@ -8,8 +8,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Editor_Window.h" />
-    <ClInclude Include="framework.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="framework.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -27,5 +27,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
 </Project>

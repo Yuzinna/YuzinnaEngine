@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{c65c21d5-e4d0-4f07-b3f6-8ae94b772db7}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaAnimator.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaAnimation.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaBoxCollider2D.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaCamera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaCircleCollider2D.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaCollider.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaCollisionManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaDontDestroyOnLoad.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaEntity.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaEnums.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaGameObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaInput.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaLayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaMath.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaResource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaResources.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaRigidbody.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaSceneManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaScript.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaSpriteRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaTexture.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaTilemapRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaTime.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaTransform.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)uginaApplication.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaAnimator.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaAnimation.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaBoxCollider2D.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaCamera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaCircleCollider2D.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaCollider.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaCollisionManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaDontDestroyOnLoad.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaEntity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaGameObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaInput.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaMath.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaResource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaResources.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaRigidbody.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaSceneManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaScript.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaSpriteRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaTexture.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaTilemapRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaTime.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaTransform.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)uginaApplication.cpp" />
+  </ItemGroup>
+</Project>

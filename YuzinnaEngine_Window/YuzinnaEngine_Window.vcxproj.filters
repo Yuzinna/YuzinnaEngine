@@ -33,21 +33,6 @@
     <ClInclude Include="yuzinnaTile.h" />
     <ClInclude Include="yuzinnaPlayer.h" />
     <ClInclude Include="yuzinnaCat.h" />
-    <ClInclude Include="yuzinnaBabaGridComponent.h">
-      <Filter>baba</Filter>
-    </ClInclude>
-    <ClInclude Include="yuzinnaBabaGridManager.h">
-      <Filter>baba</Filter>
-    </ClInclude>
-    <ClInclude Include="yuzinnaBabaPlayerScript.h">
-      <Filter>baba</Filter>
-    </ClInclude>
-    <ClInclude Include="yuzinnaBabaScene.h">
-      <Filter>baba</Filter>
-    </ClInclude>
-    <ClInclude Include="yuzinnaBabaWordComponent.h">
-      <Filter>baba</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yuzinnaPlayScene.cpp">
@@ -76,21 +61,6 @@
     <ClCompile Include="yuzinnaTile.cpp" />
     <ClCompile Include="yuzinnaPlayer.cpp" />
     <ClCompile Include="yuzinnaCat.cpp" />
-    <ClCompile Include="yuzinnaBabaGridComponent.cpp">
-      <Filter>baba</Filter>
-    </ClCompile>
-    <ClCompile Include="yuzinnaBabaGridManager.cpp">
-      <Filter>baba</Filter>
-    </ClCompile>
-    <ClCompile Include="yuzinnaBabaPlayerScript.cpp">
-      <Filter>baba</Filter>
-    </ClCompile>
-    <ClCompile Include="yuzinnaBabaScene.cpp">
-      <Filter>baba</Filter>
-    </ClCompile>
-    <ClCompile Include="yuzinnaBabaWordComponent.cpp">
-      <Filter>baba</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">

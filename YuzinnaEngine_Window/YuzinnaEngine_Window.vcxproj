@@ -137,11 +137,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="yuzinnaBabaGridComponent.h" />
-    <ClInclude Include="yuzinnaBabaGridManager.h" />
-    <ClInclude Include="yuzinnaBabaPlayerScript.h" />
-    <ClInclude Include="yuzinnaBabaScene.h" />
-    <ClInclude Include="yuzinnaBabaWordComponent.h" />
     <ClInclude Include="yuzinnaCameraScript.h" />
     <ClInclude Include="yuzinnaCat.h" />
     <ClInclude Include="yuzinnaCatScript.h" />
@@ -158,11 +153,6 @@
     <ClInclude Include="yuzinnaToolScene.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="yuzinnaBabaGridComponent.cpp" />
-    <ClCompile Include="yuzinnaBabaGridManager.cpp" />
-    <ClCompile Include="yuzinnaBabaPlayerScript.cpp" />
-    <ClCompile Include="yuzinnaBabaScene.cpp" />
-    <ClCompile Include="yuzinnaBabaWordComponent.cpp" />
     <ClCompile Include="yuzinnaCameraScript.cpp" />
     <ClCompile Include="yuzinnaCat.cpp" />
     <ClCompile Include="yuzinnaCatScript.cpp" />

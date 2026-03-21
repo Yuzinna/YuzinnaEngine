@@ -4,7 +4,6 @@
 #include "yuzinnaLayer.h"
 #include "yuzinnaTransform.h"
 #include "yuzinnaTilemapRenderer.h"
-#include "yuzinnaBabaProperty.h"
 
 namespace yuzinna
 {
@@ -33,80 +32,21 @@ namespace yuzinna
 		return results;
 	}
 
-	bool GridManager::HasProperty(math::Vector2 gridIndex, eBabaProperty property)
+	void GridManager::MoveObject(GameObject* obj, math::Vector2 nextGridPos)
 	{
-		std::vector<GameObject*> objects = GetObjectsAt(gridIndex);
-		for (GameObject* obj : objects)
-		{
-			BabaProperty* p = obj->GetComponent<BabaProperty>();
-			if (p && p->HasProperty(property))
-				return true;
-		}
-		return false;
-	}
+		if (obj == nullptr) return;
 
-	std::vector<GameObject*> GridManager::GetObjectsWithProperty(math::Vector2 gridIndex, eBabaProperty property)
-	{
-		std::vector<GameObject*> results;
-		std::vector<GameObject*> objects = GetObjectsAt(gridIndex);
-		for (GameObject* obj : objects)
-		{
-			BabaProperty* p = obj->GetComponent<BabaProperty>();
-			if (p && p->HasProperty(property))
-				results.push_back(obj);
-		}
-		return results;
-	}
-
-	bool GridManager::TryMove(GameObject* obj, math::Vector2 direction)
-	{
-		if (obj == nullptr) return false;
-
-		math::Vector2 nextGridPos = obj->GetGridIndex() + direction;
-
-		// 1. ?ㅼ쓬 移몄뿉 ?덈뒗 臾쇱껜???뺤씤
-		std::vector<GameObject*> targets = GetObjectsAt(nextGridPos);
-
-		// 2. 媛濡쒕쭑??寃껋씠 ?덈뒗吏 ?뺤씤
-		for (GameObject* target : targets)
-		{
-			BabaProperty* prop = target->GetComponent<BabaProperty>();
-			if (prop == nullptr) continue;
-
-			// STOP ?띿꽦???덉쑝硫??대룞 遺덇?
-			if (prop->HasProperty(eBabaProperty::STOP))
-			{
-				return false;
-			}
-
-			// PUSH ?띿꽦???덉쑝硫?諛?대낯??
-			if (prop->HasProperty(eBabaProperty::PUSH))
-			{
-				// ?곗뇙?곸쑝濡?諛湲곗뿉 ?ㅽ뙣?섎㈃ ?섎룄 紐??吏곸엫
-				if (!TryMove(target, direction))
-				{
-					return false;
-				}
-			}
-		}
-
-		// 3. ?대룞 ?섑뻾
-		moveObject(obj, nextGridPos);
-		return true;
-	}
-
-	void GridManager::moveObject(GameObject* obj, math::Vector2 nextGridPos)
-	{
 		obj->SetGridIndex(nextGridPos);
 
-		// Transform ?꾩튂 ?낅뜲?댄듃 (?쎌? 醫뚰몴)
+		// Transform 위치 업데이트 (화면 좌표)
 		Transform* tr = obj->GetComponent<Transform>();
 		if (tr)
 		{
-			// TilemapRenderer?먯꽌 ?ㅼ젙???꾩뿭 ????ш린瑜??쒖슜
+			// TilemapRenderer에서 설정한 전역 타일 크기를 활용 (가정)
+			// 실제 프로젝트 구조에 맞춰 조정 필요
 			math::Vector2 screenPos;
-			screenPos.x = nextGridPos.x * TilemapRenderer::TileSize.x;
-			screenPos.y = nextGridPos.y * TilemapRenderer::TileSize.y;
+			screenPos.x = nextGridPos.x * 48.0f; // 기본 타일 크기 예시 (48x48)
+			screenPos.y = nextGridPos.y * 48.0f;
 			tr->SetPosition(screenPos);
 		}
 	}

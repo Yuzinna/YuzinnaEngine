@@ -15,13 +15,11 @@ namespace yuzinna::object
 }
 namespace yuzinna
 {
-	//����Ƽ������ ��� ������Ʈ�� Ʈ������ ������Ʈ�� ���´�.
 	GameObject::GameObject()
 		:mState(eState::Active)
 		,mLayerType(eLayerType::None)
 	{
-		//�̸� enum ������ƮŸ���� �ִ�ũ�⸸ŭ ���͸� �÷����Ƽ� ���� �ذ�
-		mComponents.resize((UINT)enums::eComponentType::End);
+		// 이전에 고정 크기로 컴포넌트를 할당하던 방식을 가변 벡터(push_back) 방식으로 수정
 		initializeTransform();
 	}
 
@@ -33,9 +31,9 @@ namespace yuzinna
 			{
 				continue;
 			}
-			//�޸� ����
+			//메모리 해제
 			delete com;
-			//�޸𸮸� nullptr�� �б�
+			//메모리를 nullptr로 초기화
 			com = nullptr;
 		}
 	}
@@ -90,8 +88,4 @@ namespace yuzinna
 	{
 		AddComponent<Transform>();
 	}
-	
-
 }
-
-

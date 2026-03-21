@@ -2,6 +2,8 @@
 #include "CommonInclude.h"
 #include "yuzinnaComponent.h"
 #include "yuzinnaCollider.h"
+#include <vector>
+
 namespace yuzinna
 {
 	namespace object
@@ -18,11 +20,11 @@ namespace yuzinna
 		friend void object::Destroy(GameObject* obj);
 		enum class eState
 		{
-			//Ȱ��
+			//활성
 			Active,
-			//������
+			//일시정지
 			Paused,
-			//����
+			//사망
 			Dead,
 			End
 		};
@@ -39,12 +41,11 @@ namespace yuzinna
 		T* AddComponent()
 		{
 			T* comp = new T();
-			comp->Initialize();
 			comp->SetOwner(this);
+			comp->Initialize();
 
-			//������ ���� Ǫ�� ���Լ��� ���� ��ſ� enums Ÿ���� �ε����� ���
-			//mComponets.push_back(comp);
-			mComponents[(UINT)comp->GetType()] = comp;
+			// 타입별 인덱스 대신 벡터에 순차적으로 추가하여 여러 컴포넌트(스크립트) 허용
+			mComponents.push_back(comp);
 
 			return comp;
 		}
@@ -55,9 +56,9 @@ namespace yuzinna
 			T* component = nullptr;
 			for (Component* comp : mComponents)
 			{
-				//mComponents�ȿ� �ִ� ������Ʈ���� �ϳ��ϳ� ĳ�����غ�
+				//mComponents 안에 있는 컴포넌트들을 하나하나 캐스팅해봄
 				component = dynamic_cast<T*>(comp);
-				//ĳ�����Ѱ��� �ߵǼ� component�ȿ� ���� �ݺ��� Ż��
+				//캐스팅한 결과가 성공하여 component 안에 들어가면 반복문 탈출
 				if (component)
 				{
 					break;
@@ -93,5 +94,3 @@ namespace yuzinna
 
 	};
 }
-
-

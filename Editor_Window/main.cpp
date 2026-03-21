@@ -1,19 +1,19 @@
-﻿//// Editor_Window.cpp : 애플리케이션에 대한 진입점을 정의합니다.
+//// Editor_Window.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
 
 #include "framework.h"
 #include "Editor_Window.h"
 
-#include "..\\UginaEngine_SOURCE\\uginaApplication.h"
-#include "..\\UginaEngine_SOURCE\\uginaResources.h"
-#include "..\\UginaEngine_SOURCE\\uginaTexture.h"
-#include "..\\UginaEngine_SOURCE\\uginaSceneManager.h"
+#include "..\\YuzinnaEngine_SOURCE\\yuzinnaApplication.h"
+#include "..\\YuzinnaEngine_SOURCE\\yuzinnaResources.h"
+#include "..\\YuzinnaEngine_SOURCE\\yuzinnaTexture.h"
+#include "..\\YuzinnaEngine_SOURCE\\yuzinnaSceneManager.h"
 
-#include "..\\UginaEngine_Window\\uginaLoadResources.h"
-#include "..\\UginaEngine_Window\\uginaLoadScenes.h"
-#include "..\\UginaEngine_Window\\uginaToolScene.h"
+#include "..\\YuzinnaEngine_Window\\yuzinnaLoadResources.h"
+#include "..\\YuzinnaEngine_Window\\yuzinnaLoadScenes.h"
+#include "..\\YuzinnaEngine_Window\\yuzinnaToolScene.h"
 
-ugina::Application api;
+yuzinna::Application api;
 
 ULONG_PTR gpToken;
 Gdiplus::GdiplusStartupInput gpsi;
@@ -172,8 +172,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     Gdiplus::GdiplusStartup(&gpToken, &gpsi, NULL);
 
     //load Scenes
-    ugina::LoadResources();
-    ugina::LoadScenes();
+    yuzinna::LoadResources();
+    yuzinna::LoadScenes();
 
     InitToolScene(hInstance);
 
@@ -187,7 +187,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 BOOL InitToolScene(HINSTANCE hInstance)
 {
-    ugina::Scene* activeScene = ugina::SceneManager::GetActiveScene();
+    yuzinna::Scene* activeScene = yuzinna::SceneManager::GetActiveScene();
     std::wstring name = activeScene->GetName();
 
     if (name == L"ToolScene")
@@ -196,8 +196,8 @@ BOOL InitToolScene(HINSTANCE hInstance)
             0, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
         //Tile 윈도우 크기 조정 -- TOOL
-        ugina::graphics::Texture* texture
-            = ugina::Resources::Find<ugina::graphics::Texture>(L"SpringFloor");
+        yuzinna::graphics::Texture* texture
+            = yuzinna::Resources::Find<yuzinna::graphics::Texture>(L"SpringFloor");
 
         RECT rect = { 0, 0, texture->GetWidth(), texture->GetHeight() };
         AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{c65c21d5-e4d0-4f07-b3f6-8ae94b772db7}</ItemsProjectGuid>
+    <ItemsProjectName>YuzinnaEngine_SOURCE</ItemsProjectName>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaAnimator.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaAnimation.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaBoxCollider2D.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaCamera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaCircleCollider2D.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaCollider.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaCollisionManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaDontDestroyOnLoad.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaEntity.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaEnums.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaGameObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaInput.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaLayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaMath.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaResource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaResources.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaRigidbody.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaSceneManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaScript.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaSpriteRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaTexture.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaTilemapRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaTime.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaTransform.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaApplication.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaAnimator.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaAnimation.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaBoxCollider2D.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaCamera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaCircleCollider2D.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaCollider.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaCollisionManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaDontDestroyOnLoad.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaEntity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaGameObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaInput.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaMath.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaResource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaResources.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaRigidbody.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaSceneManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaScript.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaSpriteRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaTexture.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaTilemapRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaTime.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaTransform.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaApplication.cpp" />
+  </ItemGroup>
+</Project>

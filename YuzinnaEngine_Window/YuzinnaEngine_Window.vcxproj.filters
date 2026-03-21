@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="yuzinnaPlayScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="yuzinnaTitleScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="yuzinnaToolScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="yuzinnaPlayerScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="yuzinnaCatScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="yuzinnaCameraScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="yuzinnaFloor.h" />
+    <ClInclude Include="yuzinnaFloorScript.h" />
+    <ClInclude Include="yuzinnaLoadScenes.h">
+      <Filter>Load</Filter>
+    </ClInclude>
+    <ClInclude Include="yuzinnaLoadResources.h">
+      <Filter>Load</Filter>
+    </ClInclude>
+    <ClInclude Include="yuzinnaGameScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="yuzinnaTile.h" />
+    <ClInclude Include="yuzinnaPlayer.h" />
+    <ClInclude Include="yuzinnaCat.h" />
+    <ClInclude Include="yuzinnaBabaGridComponent.h">
+      <Filter>baba</Filter>
+    </ClInclude>
+    <ClInclude Include="yuzinnaBabaGridManager.h">
+      <Filter>baba</Filter>
+    </ClInclude>
+    <ClInclude Include="yuzinnaBabaPlayerScript.h">
+      <Filter>baba</Filter>
+    </ClInclude>
+    <ClInclude Include="yuzinnaBabaScene.h">
+      <Filter>baba</Filter>
+    </ClInclude>
+    <ClInclude Include="yuzinnaBabaWordComponent.h">
+      <Filter>baba</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="yuzinnaPlayScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="yuzinnaTitleScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="yuzinnaToolScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="yuzinnaPlayerScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="yuzinnaCatScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="yuzinnaCameraScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="yuzinnaFloor.cpp" />
+    <ClCompile Include="yuzinnaFloorScript.cpp" />
+    <ClCompile Include="yuzinnaGameScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="yuzinnaTile.cpp" />
+    <ClCompile Include="yuzinnaPlayer.cpp" />
+    <ClCompile Include="yuzinnaCat.cpp" />
+    <ClCompile Include="yuzinnaBabaGridComponent.cpp">
+      <Filter>baba</Filter>
+    </ClCompile>
+    <ClCompile Include="yuzinnaBabaGridManager.cpp">
+      <Filter>baba</Filter>
+    </ClCompile>
+    <ClCompile Include="yuzinnaBabaPlayerScript.cpp">
+      <Filter>baba</Filter>
+    </ClCompile>
+    <ClCompile Include="yuzinnaBabaScene.cpp">
+      <Filter>baba</Filter>
+    </ClCompile>
+    <ClCompile Include="yuzinnaBabaWordComponent.cpp">
+      <Filter>baba</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{c10e6c64-00f0-4626-b329-498627543478}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{8ccb88c6-81ff-41f3-a9da-a4e4aecb7aa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{a71b7508-83cd-4c67-adfc-d889b4d6f1f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Load">
+      <UniqueIdentifier>{58b0d174-589b-481b-8103-597696023cae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="baba">
+      <UniqueIdentifier>{f99ff10e-83b3-4076-86cb-8bb8c8504610}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

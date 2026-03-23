@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
@@ -28,6 +28,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaEnums.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaGameObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaGridManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaMath.h" />
@@ -58,6 +59,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaDontDestroyOnLoad.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaGameObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaGridManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaMath.cpp" />

@@ -22,7 +22,7 @@ namespace yuzinna
 
 	void ToolScene::Initialize()
 	{
-		GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::Particle, Vector2(344.0f, 442.0f));
+		GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::Particle, Vector2(800.0f, 450.0f));
 		Camera* cameraComp = camera->AddComponent<Camera>();
 		camera->AddComponent<CameraScript>();
 
@@ -189,7 +189,7 @@ namespace yuzinna
 			);
 
 			MoveToEx(hdc, pos.x, 0, NULL);
-			LineTo(hdc, pos.x, 1000);
+			LineTo(hdc, pos.x, 2000);
 		}
 		for (size_t i = 0; i < 50; i++)
 		{
@@ -198,7 +198,7 @@ namespace yuzinna
 				Vector2(0.0f,TilemapRenderer::TileSize.y * i)
 			);
 			MoveToEx(hdc, 0, pos.y, NULL);
-			LineTo(hdc, 1000, pos.y);
+			LineTo(hdc, 2000, pos.y);
 		}
 	}
 	void ToolScene::CreateTileObject()

@@ -1,28 +1,19 @@
 #include "yuzinnaPlayScene.h"
 #include "yuzinnaGameObject.h"
-#include "yuzinnaPlayer.h"
 #include "yuzinnaTransform.h"
 #include "yuzinnaSpriteRenderer.h"
-#include "yuzinnaInput.h"
-#include "yuzinnaTitleScene.h"
-#include "yuzinnaSceneManager.h"
 #include "yuzinnaObject.h"
 #include "yuzinnaTexture.h"
 #include "yuzinnaResources.h"
-#include "yuzinnaPlayerScript.h"
 #include "yuzinnaCamera.h"
 #include "yuzinnaRenderer.h"
+#include "yuzinnaGridManager.h"
+#include "yuzinnaBabaScript.h"
 #include "yuzinnaAnimator.h"
-#include "yuzinnaCat.h"
-#include "yuzinnaCatScript.h"
-#include "yuzinnaBoxCollider2D.h"
-#include "yuzinnaCircleCollider2D.h"
-#include "yuzinnaCollisionManager.h"
-#include "yuzinnaTile.h"
-#include "yuzinnaTilemapRenderer.h"
-#include "yuzinnaRigidbody.h"
-#include "yuzinnaFloor.h"
-#include "yuzinnaFloorScript.h"
+#include "yuzinnaWord.h"
+#include "yuzinnaObjectFactory.h"
+#include "yuzinnaMapLoader.h"
+#include "yuzinnaRuleManager.h"
 
 namespace yuzinna
 {
@@ -34,72 +25,33 @@ namespace yuzinna
 	}
 	void PlayScene::Initialize()
 	{
-		/*FILE* pFile = nullptr;
-		_wfopen_s(&pFile,L"..\\Resources\\Test", L"rb");
-		while (true)
-		{
-			int idxX = 0;
-			int idxY = 0;
-
-			int posX = 0;
-			int posY = 0;
-			if (fread(&idxX, sizeof(int), 1, pFile) == NULL)
-				break;
-			if (fread(&idxY, sizeof(int), 1, pFile) == NULL)
-				break;
-			if (fread(&posX, sizeof(int), 1, pFile) == NULL)
-				break;
-			if (fread(&posY, sizeof(int), 1, pFile) == NULL)
-				break;
-
-			Tile* tile = object::Instantiate<Tile>(eLayerType::Tile, Vector2(posX, posY));
-			TilemapRenderer* tmr = tile->AddComponent<TilemapRenderer>();
-			tmr->SetTexture(Resources::Find<graphics::Texture>(L"SpringFloor"));
-			tmr->SetIndex(Vector2(idxX, idxY));
-		}
-		fclose(pFile);
-		*/
-
-		//플레이씬에서 쓰이는 메인카메라 설정
-		GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::Particle, Vector2(344.0f, 442.0f));
+		// 메인 카메라 설정 (중앙 배치)
+		GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::Particle, Vector2(800.0f, 450.0f));
 		Camera* cameraComp = camera->AddComponent<Camera>();
 		renderer::mainCamera = cameraComp;
 
-		mPlayer = object::Instantiate<Player>(enums::eLayerType::Player);
-		object::DontDestroyOnLoad(mPlayer);
+		// 맵 데이터 정의
+		// B: 바바, F: 깃발, W: 벽
+		// b,i,y: Baba is You, f,i,n: Flag is Win, k,i,s: Wall is Stop
+		std::vector<std::wstring> map = {
+			L"WWWWWWWWWWWWWWWW",
+			L"W..............W",
+			L"W....B....kis..W", // 바바와 Wall is Stop 문장
+			L"W..............W",
+			L"WWWWWWWWWWWWWWWW", // 바바를 가두는 벽
+			L"................",
+			L".......F........", // 벽 바깥의 깃발
+			L"......biy....fin"  // 기본 규칙 (Baba Is You, Flag Is Win)
+		};
 
-
-		PlayerScript* plScript = mPlayer->AddComponent<PlayerScript>();
-
-		BoxCollider2D* collider = mPlayer->AddComponent<BoxCollider2D>();
-		collider->SetOffset(Vector2(-50.0f, -50.0));
-
-		graphics::Texture* playerTex = Resources::Find<graphics::Texture>(L"Player");
-		Animator* playerAnimator = mPlayer->AddComponent<Animator>();
-		playerAnimator->CreateAnimation(L"Idle", playerTex
-			, Vector2(2000.0f, 250.0f), Vector2(250.0f, 250.0f), Vector2::Zero, 1, 0.1f);
-		playerAnimator->CreateAnimation(L"FrontGiveWater", playerTex
-			, Vector2(0.0f, 2000.0f), Vector2(250.0f, 250.0f), Vector2::Zero, 12, 0.1f);
-		playerAnimator->PlayAnimation(L"Idle", false);
-
-		//playerAnimator->GetCompleteEvent(L"FrontGiveWater") = std::bind(&PlayerScript::AttackEffect, plScript);
-
-		mPlayer->GetComponent<Transform>()->SetPosition(Vector2(300.0f, 250.0f));
-		mPlayer->AddComponent<Rigidbody>();
-
-
-		Floor* floor = object::Instantiate<Floor>(eLayerType::Floor, Vector2(100.0f, 600.0f));
-		floor->SetName(L"Floor");
-		BoxCollider2D* floorCol = floor->AddComponent<BoxCollider2D>();
-		floorCol->SetSize(Vector2(3.0f, 1.0f));
-		floor->AddComponent<FloorScript>();
-
-
-
-
+		// MapLoader를 통해 맵 생성 및 오토 타일링 적용
+		MapLoader::LoadMap(map);
 
 		// 게임 오브젝트 생성후에 레이어와 게임오브젝트들의 init함수를 호출
 		Scene::Initialize();
+
+		// 초기 규칙 설정
+		RuleManager::UpdateRules();
 	}
 	void PlayScene::Update()
 	{
@@ -108,18 +60,14 @@ namespace yuzinna
 	void PlayScene::LateUpdate()
 	{
 		Scene::LateUpdate();
-
 	}
 	void PlayScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-
 	}
 	void PlayScene::OnEnter()
 	{
 		Scene::OnEnter();
-		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Animal, true);
-		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Floor, true);
 	}
 	void PlayScene::OnExit()
 	{

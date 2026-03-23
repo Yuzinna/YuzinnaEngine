@@ -70,7 +70,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaDontDestroyOnLoad.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaRigidbody.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaObject.cpp">
       <Filter>Object</Filter>
     </ClCompile>
@@ -82,6 +81,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaCollisionManager.cpp">
       <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaRigidbody.cpp">
+      <Filter>Rigidbody</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaGridManager.cpp">
+      <Filter>Grid</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -160,7 +165,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaDontDestroyOnLoad.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaRigidbody.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaObject.h">
       <Filter>Object</Filter>
     </ClInclude>
@@ -172,6 +176,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaCollisionManager.h">
       <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaRigidbody.h">
+      <Filter>Rigidbody</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaGridManager.h">
+      <Filter>Grid</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -211,9 +221,6 @@
     <Filter Include="Layer">
       <UniqueIdentifier>{e963f14f-ad86-4f57-ba5f-84127be6ec74}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Renderer">
-      <UniqueIdentifier>{71c48dcc-751a-4606-80e3-28338be058df}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources\Texture">
       <UniqueIdentifier>{e91714a3-d5a8-4699-bb32-9dbf8b64954e}</UniqueIdentifier>
     </Filter>
@@ -234,6 +241,15 @@
     </Filter>
     <Filter Include="Collision">
       <UniqueIdentifier>{a0e4eb31-9a6b-480a-9da1-e416703c6de2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rigidbody">
+      <UniqueIdentifier>{2c05585b-0738-4bfb-b9e8-4a37a1e4448a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{71c48dcc-751a-4606-80e3-28338be058df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Grid">
+      <UniqueIdentifier>{6962b407-b097-451f-8116-e8c003fe8395}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

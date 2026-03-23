@@ -137,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="yuzinnaBabaScript.h" />
     <ClInclude Include="yuzinnaCameraScript.h" />
     <ClInclude Include="yuzinnaCat.h" />
     <ClInclude Include="yuzinnaCatScript.h" />
@@ -145,26 +146,37 @@
     <ClInclude Include="yuzinnaGameScene.h" />
     <ClInclude Include="yuzinnaLoadResources.h" />
     <ClInclude Include="yuzinnaLoadScenes.h" />
+    <ClInclude Include="yuzinnaMapLoader.h" />
+    <ClInclude Include="yuzinnaObjectFactory.h" />
     <ClInclude Include="yuzinnaPlayer.h" />
     <ClInclude Include="yuzinnaPlayerScript.h" />
     <ClInclude Include="yuzinnaPlayScene.h" />
+    <ClInclude Include="yuzinnaRuleManager.h" />
     <ClInclude Include="yuzinnaTile.h" />
     <ClInclude Include="yuzinnaTitleScene.h" />
     <ClInclude Include="yuzinnaToolScene.h" />
+    <ClInclude Include="yuzinnaUndoManager.h" />
+    <ClInclude Include="yuzinnaWord.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="yuzinnaBabaScript.cpp" />
     <ClCompile Include="yuzinnaCameraScript.cpp" />
     <ClCompile Include="yuzinnaCat.cpp" />
     <ClCompile Include="yuzinnaCatScript.cpp" />
     <ClCompile Include="yuzinnaFloor.cpp" />
     <ClCompile Include="yuzinnaFloorScript.cpp" />
     <ClCompile Include="yuzinnaGameScene.cpp" />
+    <ClCompile Include="yuzinnaMapLoader.cpp" />
+    <ClCompile Include="yuzinnaObjectFactory.cpp" />
     <ClCompile Include="yuzinnaPlayer.cpp" />
     <ClCompile Include="yuzinnaPlayerScript.cpp" />
     <ClCompile Include="yuzinnaPlayScene.cpp" />
+    <ClCompile Include="yuzinnaRuleManager.cpp" />
     <ClCompile Include="yuzinnaTile.cpp" />
     <ClCompile Include="yuzinnaTitleScene.cpp" />
     <ClCompile Include="yuzinnaToolScene.cpp" />
+    <ClCompile Include="yuzinnaUndoManager.cpp" />
+    <ClCompile Include="yuzinnaWord.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

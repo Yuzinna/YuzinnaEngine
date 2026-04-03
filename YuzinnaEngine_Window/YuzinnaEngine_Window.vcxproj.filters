@@ -33,12 +33,24 @@
     <ClInclude Include="yuzinnaTile.h" />
     <ClInclude Include="yuzinnaPlayer.h" />
     <ClInclude Include="yuzinnaCat.h" />
-    <ClInclude Include="yuzinnaBabaScript.h" />
-    <ClInclude Include="yuzinnaObjectFactory.h" />
-    <ClInclude Include="yuzinnaWord.h" />
-    <ClInclude Include="yuzinnaMapLoader.h" />
-    <ClInclude Include="yuzinnaRuleManager.h" />
-    <ClInclude Include="yuzinnaUndoManager.h" />
+    <ClInclude Include="yuzinnaWord.h">
+      <Filter>baba</Filter>
+    </ClInclude>
+    <ClInclude Include="yuzinnaUndoManager.h">
+      <Filter>baba</Filter>
+    </ClInclude>
+    <ClInclude Include="yuzinnaRuleManager.h">
+      <Filter>baba</Filter>
+    </ClInclude>
+    <ClInclude Include="yuzinnaObjectFactory.h">
+      <Filter>baba</Filter>
+    </ClInclude>
+    <ClInclude Include="yuzinnaMapLoader.h">
+      <Filter>baba</Filter>
+    </ClInclude>
+    <ClInclude Include="yuzinnaBabaScript.h">
+      <Filter>baba</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yuzinnaPlayScene.cpp">
@@ -67,12 +79,24 @@
     <ClCompile Include="yuzinnaTile.cpp" />
     <ClCompile Include="yuzinnaPlayer.cpp" />
     <ClCompile Include="yuzinnaCat.cpp" />
-    <ClCompile Include="yuzinnaBabaScript.cpp" />
-    <ClCompile Include="yuzinnaObjectFactory.cpp" />
-    <ClCompile Include="yuzinnaWord.cpp" />
-    <ClCompile Include="yuzinnaMapLoader.cpp" />
-    <ClCompile Include="yuzinnaRuleManager.cpp" />
-    <ClCompile Include="yuzinnaUndoManager.cpp" />
+    <ClCompile Include="yuzinnaUndoManager.cpp">
+      <Filter>baba</Filter>
+    </ClCompile>
+    <ClCompile Include="yuzinnaWord.cpp">
+      <Filter>baba</Filter>
+    </ClCompile>
+    <ClCompile Include="yuzinnaRuleManager.cpp">
+      <Filter>baba</Filter>
+    </ClCompile>
+    <ClCompile Include="yuzinnaObjectFactory.cpp">
+      <Filter>baba</Filter>
+    </ClCompile>
+    <ClCompile Include="yuzinnaMapLoader.cpp">
+      <Filter>baba</Filter>
+    </ClCompile>
+    <ClCompile Include="yuzinnaBabaScript.cpp">
+      <Filter>baba</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">

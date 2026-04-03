@@ -22,7 +22,7 @@ namespace yuzinna
 
 	void Word::Update()
 	{
-		// 상태가 변했을 때만 애니메이션을 변경합니다.
+		// 상태가 변했을 때만 애니메이션을 변경
 		if (mbActive != mbPrevActive)
 		{
 			Animator* ani = GetOwner()->GetComponent<Animator>();

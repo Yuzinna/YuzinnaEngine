@@ -6,8 +6,8 @@
 
 namespace yuzinna
 {
-	Vector2 TilemapRenderer::TileSize = Vector2(50.0f, 50.0f);
-	Vector2 TilemapRenderer::OriginTileSize = Vector2(50.0f, 50.0f);
+	Vector2 TilemapRenderer::TileSize = Vector2(48.0f, 48.0f);
+	Vector2 TilemapRenderer::OriginTileSize = Vector2(48.0f, 48.0f);
 	Vector2 TilemapRenderer::SelectedIndex = Vector2::One;
 
 	TilemapRenderer::TilemapRenderer()
@@ -15,11 +15,14 @@ namespace yuzinna
 		,mTexture(nullptr)
 		,mSize(1.0f,1.0f)
 		,mIndex(0,0)
-		,mTileSize(Vector2(25.0f,25.0f))
+		,mTileSize(Vector2(24.0f,24.0f))
 	{
-		TileSize = mTileSize * mSize;
+		if (mTileSize.x > 0 && mTileSize.y > 0)
+		{
+			mSize.x = TileSize.x / mTileSize.x;
+			mSize.y = TileSize.y / mTileSize.y;
+		}
 		OriginTileSize = mTileSize;
-
 	}
 
 

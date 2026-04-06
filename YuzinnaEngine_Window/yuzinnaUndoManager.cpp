@@ -1,13 +1,14 @@
 #include "yuzinnaUndoManager.h"
 #include "yuzinnaGameObject.h"
 #include "yuzinnaTransform.h"
+#include "yuzinnaAnimator.h"
 #include "..\\YuzinnaEngine_SOURCE\\yuzinnaSceneManager.h"
 #include "..\\YuzinnaEngine_SOURCE\\yuzinnaScene.h"
 #include "..\\YuzinnaEngine_SOURCE\\yuzinnaLayer.h"
 #include "..\\YuzinnaEngine_SOURCE\\yuzinnaGridManager.h"
 #include "yuzinnaRuleManager.h"
 #include "yuzinnaBabaScript.h"
-
+#include "..\\YuzinnaEngine_SOURCE\\yuzinnaTilemapRenderer.h"
 namespace yuzinna
 {
 	std::stack<std::vector<ObjectState>> UndoManager::mHistory = {};
@@ -19,8 +20,14 @@ namespace yuzinna
 
 		std::vector<ObjectState> currentState;
 
-		for (int i = 0; i < (int)enums::eLayerType::Max; ++i)
+		for (int i = 0; i < (int)enums::eLayerType::End; ++i)
 		{
+			// Undo 대상에서 제외할 레이어 (카메라, UI 등)
+			if ((enums::eLayerType)i == enums::eLayerType::Camera ||
+				(enums::eLayerType)i == enums::eLayerType::UI ||
+				(enums::eLayerType)i == enums::eLayerType::None)
+				continue;
+
 			Layer* layer = activeScene->GetLayer((enums::eLayerType)i);
 			if (layer == nullptr) continue;
 
@@ -31,14 +38,24 @@ namespace yuzinna
 				if (tr)
 				{
 					Vector2 pos = tr->GetPosition();
-					// 현재 그리드 좌표 저장 (50픽셀 기준)
-					Vector2 gridPos(std::round(pos.x / 50.0f), std::round(pos.y / 50.0f));
+					Vector2 tileSize = TilemapRenderer::TileSize;
+					if (tileSize.x <= 0 || tileSize.y <= 0) tileSize = Vector2(48.0f, 48.0f);
+
+					// 현재 그리드 좌표 저장
+					Vector2 gridPos(std::round(pos.x / tileSize.x), std::round(pos.y / tileSize.y));
 
 					int version = 0;
-					BabaScript* script = obj->GetComponent<BabaScript>();
-					if (script) version = script->GetVersion();
+					std::wstring animName = L"";
 
-					currentState.push_back({ obj, gridPos, version });
+					// 바바 스크립트 정보 저장
+					BabaScript* babaScript = obj->GetComponent<BabaScript>();
+					if (babaScript) version = babaScript->GetVersion();
+
+					// 애니메이션 정보 저장
+					Animator* ani = obj->GetComponent<Animator>();
+					if (ani) animName = ani->GetActiveAnimationName();
+
+					currentState.push_back({ obj, gridPos, version, animName });
 				}
 			}
 		}
@@ -57,6 +74,13 @@ namespace yuzinna
 		{
 			// 오브젝트를 저장된 그리드 위치로 원복
 			GridManager::MoveObject(state.obj, state.gridPos);
+
+			// 애니메이션 복구
+			Animator* ani = state.obj->GetComponent<Animator>();
+			if (ani && !state.animName.empty())
+			{
+				ani->PlayAnimation(state.animName, true);
+			}
 
 			// 바바 스크립트의 애니메이션 버전도 원복
 			BabaScript* script = state.obj->GetComponent<BabaScript>();

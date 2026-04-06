@@ -2,6 +2,7 @@
 #include "CommonInclude.h"
 #include <vector>
 #include <stack>
+#include <string>
 
 namespace yuzinna
 {
@@ -12,6 +13,7 @@ namespace yuzinna
 		GameObject* obj;
 		math::Vector2 gridPos;
 		int version;
+		std::wstring animName; // 추가: 현재 재생 중인 애니메이션 이름
 	};
 
 	class UndoManager

@@ -8,6 +8,8 @@
 #include "yuzinnaRuleManager.h"
 #include "yuzinnaWord.h"
 #include "yuzinnaUndoManager.h"
+#include "yuzinnaMapManager.h"
+#include "..\\YuzinnaEngine_SOURCE\\yuzinnaSceneManager.h"
 
 namespace yuzinna
 {
@@ -43,10 +45,10 @@ namespace yuzinna
 		if (tr == nullptr || ani == nullptr) return;
 
 
-		// 현재 화면 좌표를 타일 크기(25)로 나누어 현재 그리드 좌표를 계산
+		// 현재 화면 좌표를 타일 크기로 나누어 현재 그리드 좌표를 계산
 		math::Vector2 pos = tr->GetPosition();
 		math::Vector2 tileSize = TilemapRenderer::TileSize;
-		if (tileSize.x <= 0 || tileSize.y <= 0) tileSize = math::Vector2(25.0f, 25.0f);
+		if (tileSize.x <= 0 || tileSize.y <= 0) tileSize = math::Vector2(48.0f, 48.0f);
 
 		math::Vector2 currentGrid;
 		currentGrid.x = std::round(pos.x / tileSize.x);
@@ -55,7 +57,7 @@ namespace yuzinna
 		math::Vector2 nextGrid = currentGrid;
 		std::wstring animName = L"";
 
-		// 2. 입력 처리
+		// 2. 입력 처리 (방향키가 아닌 WASD 사용 중임 확인)
 		if (Input::GetKeyDown(eKeyCode::D)) // Right
 		{
 			nextGrid.x += 1.0f;
@@ -152,18 +154,19 @@ namespace yuzinna
 			RuleManager::UpdateRules();
 
 			// --- 승리 판정 (Win Check) ---
-			// 현재 내가 이동한 칸(nextGrid)에 있는 물체들 확인
 			auto currentObjects = GridManager::GetObjectsAt(nextGrid);
 			for (GameObject* obj : currentObjects)
 			{
-				if (obj == GetOwner()) continue; // 자기 자신 제외
+				if (obj == GetOwner()) continue;
 
 				eWordType objType = RuleManager::GetTypeByName(obj->GetName());
-				// 만약 그 물체가 WIN 속성을 가지고 있다면 승리!
 				if (RuleManager::HasRule(objType, eWordType::Win))
 				{
 					MessageBox(NULL, L"YOU WIN!", L"Baba Is You", MB_OK);
-					// (여기에 다음 씬으로 넘어가거나 게임을 리셋하는 로직을 추가할 수 있습니다.)
+					
+					// 다음 스테이지 해금 및 월드맵으로 복귀
+					MapManager::UnlockNextStage();
+					SceneManager::LoadScene(L"StageSelectScene");
 				}
 			}
 		}

@@ -5,7 +5,7 @@
 #include "..\\YuzinnaEngine_SOURCE\\yuzinnaLayer.h"
 #include "..\\YuzinnaEngine_SOURCE\\yuzinnaGridManager.h"
 #include "..\\YuzinnaEngine_SOURCE\\yuzinnaTransform.h"
-
+#include "..\\YuzinnaEngine_SOURCE\\yuzinnaTilemapRenderer.h"
 namespace yuzinna
 {
 	std::vector<Rule> RuleManager::mRules = {};
@@ -45,8 +45,11 @@ namespace yuzinna
 				{
 					Transform* tr = obj->GetComponent<Transform>();
 					Vector2 pos = tr->GetPosition();
-					// 그리드 좌표 (픽셀 좌표를 50으로 나누어 인덱스화)
-					Vector2 gridPos = Vector2(pos.x / 50.0f, pos.y / 50.0f);
+					Vector2 tileSize = TilemapRenderer::TileSize;
+					if (tileSize.x <= 0 || tileSize.y <= 0) tileSize = Vector2(48.0f, 48.0f);
+
+					// 그리드 좌표
+					Vector2 gridPos = Vector2(pos.x / tileSize.x, pos.y / tileSize.y);
 
 					// --- 가로 검사 (좌-IS-우) ---
 					auto leftObjs = GridManager::GetObjectsAt(gridPos + Vector2(-1.0f, 0.0f));

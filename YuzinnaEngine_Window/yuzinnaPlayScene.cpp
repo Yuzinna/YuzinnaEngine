@@ -14,6 +14,8 @@
 #include "yuzinnaObjectFactory.h"
 #include "yuzinnaMapLoader.h"
 #include "yuzinnaRuleManager.h"
+#include "yuzinnaMapManager.h"
+#include "yuzinnaUndoManager.h"
 
 namespace yuzinna
 {
@@ -25,34 +27,44 @@ namespace yuzinna
 	}
 	void PlayScene::Initialize()
 	{
-		// 메인 카메라 설정 (중앙 배치)
-		GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::Particle, Vector2(800.0f, 450.0f));
+		// 카메라처럼 씬 전체에서 유지되어야 하는 요소만 여기서 1번 생성
+		GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::Camera, Vector2(800.0f, 450.0f));
 		Camera* cameraComp = camera->AddComponent<Camera>();
 		renderer::mainCamera = cameraComp;
 
-		// 맵 데이터 정의
-		// B: 바바, F: 깃발, W: 벽
-		// b,i,y: Baba is You, f,i,n: Flag is Win, k,i,s: Wall is Stop
-		std::vector<std::wstring> map = {
-			L"WWWWWWWWWWWWWWWW",
-			L"W..............W",
-			L"W....B....kis..W", // 바바와 Wall is Stop 문장
-			L"W..............W",
-			L"WWWWWWWWWWWWWWWW", // 바바를 가두는 벽
-			L"................",
-			L".......F........", // 벽 바깥의 깃발
-			L"......biy....fin"  // 기본 규칙 (Baba Is You, Flag Is Win)
-		};
+		Scene::Initialize();
+	}
 
-		// MapLoader를 통해 맵 생성 및 오토 타일링 적용
+	void PlayScene::OnEnter()
+	{
+		// 1. 기존 오브젝트들 모두 제거 (카메라 레이어 제외)
+		for (int i = 0; i < (int)enums::eLayerType::End; ++i)
+		{
+			if ((enums::eLayerType)i == enums::eLayerType::Camera) continue;
+
+			Layer* layer = GetLayer((enums::eLayerType)i);
+			if (layer == nullptr) continue;
+
+			const std::vector<GameObject*>& objs = layer->GetGameObjects();
+			for (GameObject* obj : objs)
+			{
+				object::Destroy(obj);
+			}
+		}
+
+		// 2. Undo 히스토리 초기화
+		UndoManager::Clear();
+
+		// 3. 현재 스테이지 맵 로딩
+		std::vector<std::wstring> map = MapManager::GetMap(MapManager::GetCurrentStage());
 		MapLoader::LoadMap(map);
 
-		// 게임 오브젝트 생성후에 레이어와 게임오브젝트들의 init함수를 호출
-		Scene::Initialize();
-
-		// 초기 규칙 설정
+		// 4. 규칙 갱신
 		RuleManager::UpdateRules();
+
+		Scene::OnEnter();
 	}
+
 	void PlayScene::Update()
 	{
 		Scene::Update();
@@ -65,12 +77,9 @@ namespace yuzinna
 	{
 		Scene::Render(hdc);
 	}
-	void PlayScene::OnEnter()
-	{
-		Scene::OnEnter();
-	}
 	void PlayScene::OnExit()
 	{
+		// 씬을 나갈 때도 혹시 모를 잔상을 위해 오브젝트들을 정리할 수 있습니다.
 		Scene::OnExit();
 	}
 }

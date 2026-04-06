@@ -39,6 +39,23 @@ namespace yuzinna
 		// 깃발 자체 이미지
 		Resources::Load<graphics::Texture>(L"Flag", L"..\\Resources\\Baba\\Flag.png");
 
+		// 월드맵 및 스테이지 아이콘
+		Resources::Load<graphics::Texture>(L"WorldMap", L"..\\Resources\\Baba\\Map\\Map.png");
+		Resources::Load<graphics::Texture>(L"WorldCursor", L"..\\Resources\\Baba\\Map\\Cursor.png");
+
+		for (int i = 0; i <= 5; ++i)
+		{
+			std::wstring stageKey = L"StageIcon_" + std::to_wstring(i);
+			std::wstring stagePath = L"..\\Resources\\Baba\\Map\\Stage" + std::to_wstring(i) + L".png";
+			Resources::Load<graphics::Texture>(stageKey, stagePath);
+
+			std::wstring clearedKey = L"StageIcon_" + std::to_wstring(i) + L"_Cleared";
+			std::wstring clearedPath = L"..\\Resources\\Baba\\Map\\Stage" + std::to_wstring(i) + L"Cleared.png";
+			// Stage 2는 오타(Cleard)가 있을 수 있으니 예외 처리
+			if (i == 2) clearedPath = L"..\\Resources\\Baba\\Map\\Stage2Cleard.png";
+			Resources::Load<graphics::Texture>(clearedKey, clearedPath);
+		}
+
 		// 벽 이미지 (0~15번 비트마스킹용)
 		for (int i = 0; i <= 15; ++i)
 		{

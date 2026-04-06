@@ -4,18 +4,18 @@
 #include "yuzinnaTitleScene.h"
 #include "yuzinnaToolScene.h"
 #include "yuzinnaGameScene.h"
+#include "yuzinnaStageSelectScene.h"
+#include "yuzinnaMapManager.h"
 
 namespace yuzinna
 {
 	void LoadScenes()
 	{
-		// SceneManager::CreateScene<TitleScene>(L"TitleScene");
-		 SceneManager::CreateScene<PlayScene>(L"PlayScene");
-		 //SceneManager::CreateScene<ToolScene>(L"ToolScene");
-		// SceneManager::LoadScene(L"TitleScene");
-		 //SceneManager::LoadScene(L"ToolScene");
+		MapManager::Initialize();
 
-		 SceneManager::LoadScene(L"PlayScene");
+		SceneManager::CreateScene<PlayScene>(L"PlayScene");
+		SceneManager::CreateScene<StageSelectScene>(L"StageSelectScene");
 
+		SceneManager::LoadScene(L"StageSelectScene");
 	}
 }

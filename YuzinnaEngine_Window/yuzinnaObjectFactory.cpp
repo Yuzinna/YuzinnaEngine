@@ -29,10 +29,10 @@ namespace yuzinna
 		// 4방향 * 4버전 애니메이션 생성
 		for (int i = 0; i < 4; ++i)
 		{
-			ani->CreateAnimation(L"BabaUp_" + std::to_wstring(i), upTex, Vector2(25.0f * i, 0.0f), Vector2(25, 25), Vector2::Zero, 3, 0.2f, true);
-			ani->CreateAnimation(L"BabaDown_" + std::to_wstring(i), downTex, Vector2(25.0f * i, 0.0f), Vector2(25, 25), Vector2::Zero, 3, 0.2f, true);
-			ani->CreateAnimation(L"BabaLeft_" + std::to_wstring(i), leftTex, Vector2(25.0f * i, 0.0f), Vector2(25, 25), Vector2::Zero, 3, 0.2f, true);
-			ani->CreateAnimation(L"BabaRight_" + std::to_wstring(i), rightTex, Vector2(25.0f * i, 0.0f), Vector2(25, 25), Vector2::Zero, 3, 0.2f, true);
+			ani->CreateAnimation(L"BabaUp_" + std::to_wstring(i), upTex, Vector2(24.0f * i, 0.0f), Vector2(24, 24), Vector2::Zero, 3, 0.2f, true);
+			ani->CreateAnimation(L"BabaDown_" + std::to_wstring(i), downTex, Vector2(24.0f * i, 0.0f), Vector2(24, 24), Vector2::Zero, 3, 0.2f, true);
+			ani->CreateAnimation(L"BabaLeft_" + std::to_wstring(i), leftTex, Vector2(24.0f * i, 0.0f), Vector2(24, 24), Vector2::Zero, 3, 0.2f, true);
+			ani->CreateAnimation(L"BabaRight_" + std::to_wstring(i), rightTex, Vector2(24.0f * i, 0.0f), Vector2(24, 24), Vector2::Zero, 3, 0.2f, true);
 		}
 
 		ani->PlayAnimation(L"BabaRight_0", true);
@@ -108,8 +108,8 @@ namespace yuzinna
 		graphics::Texture* offTex = Resources::Find<graphics::Texture>(offKey);
 		graphics::Texture* onTex = Resources::Find<graphics::Texture>(onKey);
 
-		if (offTex) wordAni->CreateAnimation(L"Off", offTex, Vector2::Zero, Vector2(25, 25), Vector2::Zero, 3, 0.2f, true);
-		if (onTex) wordAni->CreateAnimation(L"On", onTex, Vector2::Zero, Vector2(25, 25), Vector2::Zero, 3, 0.2f, true);
+		if (offTex) wordAni->CreateAnimation(L"Off", offTex, Vector2::Zero, Vector2(24, 24), Vector2::Zero, 3, 0.2f, true);
+		if (onTex) wordAni->CreateAnimation(L"On", onTex, Vector2::Zero, Vector2(24, 24), Vector2::Zero, 3, 0.2f, true);
 
 		wordAni->PlayAnimation(L"On", true);
 		GridManager::MoveObject(word, gridPos);
@@ -128,7 +128,7 @@ namespace yuzinna
 		graphics::Texture* tex = Resources::Find<graphics::Texture>(texKey);
 		if (tex)
 		{
-			ani->CreateAnimation(L"Idle", tex, Vector2::Zero, Vector2(25, 25), Vector2::Zero, 3, 0.2f, true);
+			ani->CreateAnimation(L"Idle", tex, Vector2::Zero, Vector2(24, 24), Vector2::Zero, 3, 0.2f, true);
 			ani->PlayAnimation(L"Idle", true);
 		}
 

@@ -23,6 +23,8 @@ namespace yuzinna
 			Player,
 			Floor,
 			Particle,
+			Camera,
+			UI,
 			End,
 			Max = 16,
 

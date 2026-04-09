@@ -46,14 +46,14 @@ namespace yuzinna
 
 	void GridManager::MoveObject(GameObject* obj, math::Vector2 nextGridPos)
 	{
+		// ... (기존 코드 생략) ...
 		if (obj == nullptr) return;
 
 		Transform* tr = obj->GetComponent<Transform>();
 		if (tr)
 		{
-			// 타일 크기를 곱하여 실제 화면상의 픽셀 좌표를 계산합니다.
 			math::Vector2 tileSize = TilemapRenderer::TileSize;
-			if (tileSize.x <= 0 || tileSize.y <= 0) tileSize = math::Vector2(48.0f, 48.0f); // 안전장치
+			if (tileSize.x <= 0 || tileSize.y <= 0) tileSize = math::Vector2(48.0f, 48.0f);
 
 			math::Vector2 screenPos;
 			screenPos.x = nextGridPos.x * tileSize.x;

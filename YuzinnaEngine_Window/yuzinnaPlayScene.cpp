@@ -16,7 +16,7 @@
 #include "yuzinnaRuleManager.h"
 #include "yuzinnaMapManager.h"
 #include "yuzinnaUndoManager.h"
-
+#include "..\\YuzinnaEngine_SOURCE\\yuzinnaInput.h"
 namespace yuzinna
 {
 	PlayScene::PlayScene()
@@ -59,15 +59,39 @@ namespace yuzinna
 		std::vector<std::wstring> map = MapManager::GetMap(MapManager::GetCurrentStage());
 		MapLoader::LoadMap(map);
 
-		// 4. 규칙 갱신
+		// 4. 카메라를 맵의 정중앙으로 이동
+		if (map.size() > 0 && map[0].size() > 0 && renderer::mainCamera != nullptr)
+		{
+			float mapWidth = (float)map[0].size() * 48.0f;  // 48.0f = TileSize
+			float mapHeight = (float)map.size() * 48.0f;
+
+			Transform* cameraTr = renderer::mainCamera->GetOwner()->GetComponent<Transform>();
+			if (cameraTr != nullptr)
+			{
+				cameraTr->SetPosition(math::Vector2(mapWidth / 2.0f, mapHeight / 2.0f));
+			}
+		}
+
+		// 5. 규칙 갱신
 		RuleManager::UpdateRules();
 
 		Scene::OnEnter();
 	}
 
+	#include "yuzinnaInput.h"
+
 	void PlayScene::Update()
 	{
+		// 1. Undo 처리 (Z 키) - 씬 전체에서 딱 한 번만 실행
+		if (Input::GetKeyDown(eKeyCode::Z))
+		{
+			UndoManager::Undo();
+		}
+
 		Scene::Update();
+
+		// 2. 모든 오브젝트의 이동 처리가 끝난 후, 다음 프레임에서 다시 Undo 저장이 가능하도록 리셋
+		UndoManager::ResetCanSave();
 	}
 	void PlayScene::LateUpdate()
 	{

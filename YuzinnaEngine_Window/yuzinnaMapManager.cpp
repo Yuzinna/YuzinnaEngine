@@ -10,17 +10,76 @@ namespace yuzinna
 	{
 		// [Stage 0]
 		mMaps[0] = {
+			L"biy..........fiw",
+			L"................",
 			L"WWWWWWWWWWWWWWWW",
-			L"W..............W",
-			L"W....B....kis..W",
-			L"W..............W",
+			L".......R........",
+			L".B.....R......F.",
+			L".......R........",
 			L"WWWWWWWWWWWWWWWW",
-			L".......F........",
-			L"......biy....fin"
+			L"................",
+			L"................",
+			L"ais..........rip",
+		};
+		// [Stage 1]
+		mMaps[1] = {
+			L"....WWWWWWWW",
+			L"....W......W",
+			L"....W.i....W",
+			L"....W......W",
+			L"WWWWW....w.W",
+			L"W..........W",
+			L"W.f...F....W",
+			L"W..........W",
+			L"WWWWWWWWWWWW",
+			L"....W......W",
+			L".b..W.a....W",
+			L".i..W.i..B.W",
+			L".y..W.s....W",
+			L"....W......W",
+			L"....WWWWWWWW",
+			
+		};
+		// [Stage 2]
+		mMaps[2] = {
+			L"....FFFFFFFF",
+			L"....F......F",
+			L"....F.i....F",
+			L"....F......F",
+			L"FFFFF....w.F",
+			L"F..........F",
+			L"F.b........F",
+			L"F..........F",
+			L"FFFFFFFFFFFF",
+			L"....F......F",
+			L".a..F.f....F",
+			L".i..F.i..W.F",
+			L".y..F.s....F",
+			L"....F...FFFF",
+			L"....FFFFF...",
+			
+		};
+		mMaps[3] = {
+			L"baW...............",
+			L"iiW....WWWWWWWW...",
+			L"ysW....W......W...",
+			L"WWW....W.B..R.W...",
+			L"......tW......W...",
+			L"......iW....R.W...",
+			L"......vW......W...",
+			L"....WWWWOOOWWWWWWW",
+			L"....W......W.....W",
+			L"....W......W.rip.W",
+			L"....W......W.....W",
+			L"....WOOO.W.......W",
+			L"....WOOO...W.fiw.W",
+			L"....WFOO...W.....W",
+			L"....WWWWWWWWWWWWWW",
+			
 		};
 
 		// [Stage 1~5] (임시 데이터 추가)
-		for (int i = 1; i <= 5; ++i)
+		for (int i = 4; i <= 5; ++i)
 		{
 			mMaps[i] = mMaps[0];
 		}

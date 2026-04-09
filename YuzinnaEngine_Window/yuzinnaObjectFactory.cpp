@@ -94,10 +94,40 @@ namespace yuzinna
 			offKey = L"PushOffWord";
 			onKey = L"PushOnWord";
 			break;
+		case enums::eWordType::Sink:
+			name = L"SinkWord";
+			offKey = L"SinkOffWord";
+			onKey = L"SinkOnWord";
+			break;
 		case enums::eWordType::Wall:
 			name = L"WallWord";
 			offKey = L"WallOffWord";
 			onKey = L"WallOnWord";
+			break;
+			/*case enums::eWordType::Flag:
+				name = L"FlagWord";
+				offKey = L"FlagOffWord";
+				onKey = L"FlagOnWord";
+				break;*/
+		case enums::eWordType::Rock:
+			name = L"RockWord";
+			offKey = L"RockOffWord"; // TODO: 리소스 추가 필요 시 로딩 추가
+			onKey = L"RockOnWord";
+			break;
+		case enums::eWordType::Key:
+			name = L"KeyWord";
+			offKey = L"KeyOffWord";
+			onKey = L"KeyOnWord";
+			break;
+		case enums::eWordType::Skull:
+			name = L"SkullWord";
+			offKey = L"SkullOffWord";
+			onKey = L"SkullOnWord";
+			break;
+		case enums::eWordType::Water:
+			name = L"WaterWord";
+			offKey = L"WaterOffWord";
+			onKey = L"WaterOnWord";
 			break;
 		default:
 			name = L"UnknownWord";
@@ -115,10 +145,10 @@ namespace yuzinna
 		GridManager::MoveObject(word, gridPos);
 
 		return word;
-	}
+		}
 
-	GameObject* ObjectFactory::CreateNounObject(const std::wstring& name, const std::wstring& texKey, math::Vector2 gridPos)
-	{
+		GameObject* ObjectFactory::CreateNounObject(const std::wstring& name, const std::wstring& texKey, math::Vector2 gridPos)
+		{
 		GameObject* obj = object::Instantiate<GameObject>(enums::eLayerType::Tile);
 		obj->SetName(name);
 		obj->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
@@ -132,7 +162,53 @@ namespace yuzinna
 			ani->PlayAnimation(L"Idle", true);
 		}
 
+		// 모든 사물 오브젝트에 BabaScript를 추가하여 YOU 속성 부여 시 조종 가능하게 함
+		obj->AddComponent<BabaScript>();
+
 		GridManager::MoveObject(obj, gridPos);
 		return obj;
-	}
-}
+		}
+
+		GameObject* ObjectFactory::CreateKey(math::Vector2 gridPos)
+		{
+		return CreateNounObject(L"Key", L"Key", gridPos);
+		}
+
+		GameObject* ObjectFactory::CreateRock(math::Vector2 gridPos)
+		{
+		return CreateNounObject(L"Rock", L"Rock", gridPos);
+		}
+
+		GameObject* ObjectFactory::CreateSkull(math::Vector2 gridPos)
+		{
+		GameObject* skull = object::Instantiate<GameObject>(enums::eLayerType::Tile);
+		skull->SetName(L"Skull");
+		skull->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
+		skull->AddComponent<SpriteRenderer>();
+
+		Animator* ani = skull->AddComponent<Animator>();
+		graphics::Texture* tex = Resources::Find<graphics::Texture>(L"Skull");
+
+		if (tex)
+		{
+			// 4개 방향 (우, 상, 좌, 하) 각각 3프레임 세로 애니메이션
+			ani->CreateAnimation(L"SkullRight", tex, Vector2(0.0f, 0.0f), Vector2(24, 24), Vector2::Zero, 3, 0.2f, true);
+			ani->CreateAnimation(L"SkullUp",    tex, Vector2(24.0f, 0.0f), Vector2(24, 24), Vector2::Zero, 3, 0.2f, true);
+			ani->CreateAnimation(L"SkullLeft",  tex, Vector2(48.0f, 0.0f), Vector2(24, 24), Vector2::Zero, 3, 0.2f, true);
+			ani->CreateAnimation(L"SkullDown",  tex, Vector2(72.0f, 0.0f), Vector2(24, 24), Vector2::Zero, 3, 0.2f, true);
+
+			ani->PlayAnimation(L"SkullRight", true);
+		}
+
+		// 해골도 조종 가능하도록 추가
+		skull->AddComponent<BabaScript>();
+
+		GridManager::MoveObject(skull, gridPos);
+		return skull;
+		}
+
+		GameObject* ObjectFactory::CreateWater(math::Vector2 gridPos, const std::wstring& texKey)
+		{
+		return CreateNounObject(L"Water", texKey, gridPos);
+		}
+		}

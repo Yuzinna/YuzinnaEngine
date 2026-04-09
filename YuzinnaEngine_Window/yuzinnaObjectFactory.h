@@ -15,5 +15,9 @@ namespace yuzinna
 
 		// 일반 사물 생성 - 벽, 바위, 깃발 등 (3프레임 애니메이션)
 		static GameObject* CreateNounObject(const std::wstring& name, const std::wstring& texKey, math::Vector2 gridPos);
+		static GameObject* CreateKey(math::Vector2 gridPos);
+		static GameObject* CreateRock(math::Vector2 gridPos);
+		static GameObject* CreateSkull(math::Vector2 gridPos);
+		static GameObject* CreateWater(math::Vector2 gridPos, const std::wstring& texKey);
 	};
 }

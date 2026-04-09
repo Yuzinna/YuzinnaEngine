@@ -99,6 +99,37 @@ namespace yuzinna
 				}
 			}
 		}
+
+		// 3. --- [추가] YOU 속성 오브젝트 레이어 우선순위 조정 ---
+		for (int i = 0; i < (int)eLayerType::Max; ++i)
+		{
+			if ((eLayerType)i == eLayerType::Camera || (eLayerType)i == eLayerType::UI) continue;
+
+			Layer* layer = activeScene->GetLayer((eLayerType)i);
+			if (layer == nullptr) continue;
+
+			const std::vector<GameObject*>& objs = layer->GetGameObjects();
+			// 컬렉션 수정 중 반복문 오류 방지를 위해 복사본 사용
+			std::vector<GameObject*> copyObjs = objs;
+
+			for (GameObject* obj : copyObjs)
+			{
+				if (obj->GetComponent<Word>()) continue; // 단어 블록은 제외
+
+				eWordType type = GetTypeByName(obj->GetName());
+				bool isYou = HasRule(type, eWordType::You);
+
+				// YOU이면 Player 레이어로, 아니면 Tile 레이어로 이동 (필요 시에만)
+				if (isYou && obj->GetLayerType() != eLayerType::Player)
+				{
+					activeScene->MoveGameObjectLayer(obj, eLayerType::Player);
+				}
+				else if (!isYou && obj->GetLayerType() == eLayerType::Player)
+				{
+					activeScene->MoveGameObjectLayer(obj, eLayerType::Tile);
+				}
+			}
+		}
 	}
 
 	bool RuleManager::HasRule(eWordType noun, eWordType target)
@@ -114,13 +145,16 @@ namespace yuzinna
 	bool RuleManager::IsNoun(eWordType type)
 	{
 		return (type == eWordType::Baba || type == eWordType::Rock ||
-			type == eWordType::Wall || type == eWordType::Flag);
+			type == eWordType::Wall || type == eWordType::Flag ||
+			type == eWordType::Key || type == eWordType::Skull ||
+			type == eWordType::Water);
 	}
 
 	bool RuleManager::IsProperty(eWordType type)
 	{
 		return (type == eWordType::You || type == eWordType::Push ||
-			type == eWordType::Stop || type == eWordType::Win);
+			type == eWordType::Stop || type == eWordType::Win ||
+			type == eWordType::Sink);
 	}
 
 	eWordType RuleManager::GetTypeByName(const std::wstring& name)
@@ -129,6 +163,9 @@ namespace yuzinna
 		if (name == L"Rock") return eWordType::Rock;
 		if (name == L"Wall") return eWordType::Wall;
 		if (name == L"Flag") return eWordType::Flag;
+		if (name == L"Key")  return eWordType::Key;
+		if (name == L"Skull") return eWordType::Skull;
+		if (name == L"Water") return eWordType::Water;
 
 		return eWordType::None;
 	}

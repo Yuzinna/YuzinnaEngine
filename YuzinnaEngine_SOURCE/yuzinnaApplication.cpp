@@ -38,6 +38,8 @@ namespace yuzinna
 
 	void Application::Run()
 	{
+		Time::LockFps(60.0f);
+
 		Update();
 		LateUpdate();
 		Render();
@@ -84,7 +86,7 @@ namespace yuzinna
 
 	void Application::clearRenderTarget()
 	{
-		HBRUSH grayBrush = (HBRUSH)CreateSolidBrush(RGB(128, 128, 128));
+		HBRUSH grayBrush = (HBRUSH)CreateSolidBrush(RGB(0, 0, 0));
 		HBRUSH oldBrush = (HBRUSH)SelectObject(mBackHdc, grayBrush);
 
 		//화면 지워주기

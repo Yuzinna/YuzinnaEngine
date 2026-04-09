@@ -46,10 +46,10 @@ namespace yuzinna
 		enum class eWordType
 		{
 			None,
-			Baba, Rock, Wall, Flag, // 명사 (Noun)
-			Is,                     // 연결자 (Verb)
-			You, Push, Stop, Win,   // 속성 (Property)
+			Baba, Rock, Wall, Flag, Key, Skull, Water, // 명사 (Noun)
+			Is,                                        // 연결자 (Verb)
+			You, Push, Stop, Win, Sink,            // 속성 (Property)
 			End
-		};
+			};
 		}
 		}

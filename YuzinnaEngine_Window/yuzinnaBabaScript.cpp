@@ -28,56 +28,40 @@ namespace yuzinna
 
 	void BabaScript::Update()
 	{
-		// 1. Undo 처리 (Z 키)
-		if (Input::GetKeyDown(eKeyCode::Z))
+		// 1. 내가 현재 'YOU'인지 확인 (어떤 오브젝트든 상관없이 규칙에 따름)
+		eWordType myType = RuleManager::GetTypeByName(GetOwner()->GetName());
+		bool isYou = RuleManager::HasRule(myType, eWordType::You);
+		bool isWin = RuleManager::HasRule(myType, eWordType::Win);
+
+		// --- [추가] YOU이자 WIN인 경우 즉시 승리 ---
+		if (isYou && isWin)
 		{
-			UndoManager::Undo();
+			MessageBox(NULL, L"YOU IS WIN!", L"Baba Is You", MB_OK);
+			MapManager::UnlockNextStage();
+			SceneManager::LoadScene(L"StageSelectScene");
 			return;
 		}
 
-		// 2. 내가 현재 'YOU'인지 확인 (규칙이 없으면 조종 불가)
-		eWordType myType = RuleManager::GetTypeByName(GetOwner()->GetName());
-		if (!RuleManager::HasRule(myType, eWordType::You))
-			return;
+		if (!isYou) return;
 
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Animator* ani = GetOwner()->GetComponent<Animator>();
-		if (tr == nullptr || ani == nullptr) return;
+		if (tr == nullptr) return;
 
-
-		// 현재 화면 좌표를 타일 크기로 나누어 현재 그리드 좌표를 계산
+		// 입력 감지 (모든 YOU 오브젝트가 동일한 프레임에 입력을 받음)
 		math::Vector2 pos = tr->GetPosition();
 		math::Vector2 tileSize = TilemapRenderer::TileSize;
 		if (tileSize.x <= 0 || tileSize.y <= 0) tileSize = math::Vector2(48.0f, 48.0f);
 
-		math::Vector2 currentGrid;
-		currentGrid.x = std::round(pos.x / tileSize.x);
-		currentGrid.y = std::round(pos.y / tileSize.y);
-
+		math::Vector2 currentGrid(std::round(pos.x / tileSize.x), std::round(pos.y / tileSize.y));
 		math::Vector2 nextGrid = currentGrid;
-		std::wstring animName = L"";
+		std::wstring animPrefix = GetOwner()->GetName(); // 이름에 따른 애니메이션 처리 (Baba, Wall 등)
+		std::wstring animDir = L"";
 
-		// 2. 입력 처리 (방향키가 아닌 WASD 사용 중임 확인)
-		if (Input::GetKeyDown(eKeyCode::D)) // Right
-		{
-			nextGrid.x += 1.0f;
-			animName = L"BabaRight_";
-		}
-		else if (Input::GetKeyDown(eKeyCode::A)) // Left
-		{
-			nextGrid.x -= 1.0f;
-			animName = L"BabaLeft_";
-		}
-		else if (Input::GetKeyDown(eKeyCode::S)) // Down
-		{
-			nextGrid.y += 1.0f;
-			animName = L"BabaDown_";
-		}
-		else if (Input::GetKeyDown(eKeyCode::W)) // Up
-		{
-			nextGrid.y -= 1.0f;
-			animName = L"BabaUp_";
-		}
+		if (Input::GetKeyDown(eKeyCode::D)) { nextGrid.x += 1.0f; animDir = L"Right"; }
+		else if (Input::GetKeyDown(eKeyCode::A)) { nextGrid.x -= 1.0f; animDir = L"Left"; }
+		else if (Input::GetKeyDown(eKeyCode::S)) { nextGrid.y += 1.0f; animDir = L"Down"; }
+		else if (Input::GetKeyDown(eKeyCode::W)) { nextGrid.y -= 1.0f; animDir = L"Up"; }
 
 		if (nextGrid == currentGrid) return;
 
@@ -86,11 +70,11 @@ namespace yuzinna
 		math::Vector2 checkGrid = nextGrid;
 		bool canMove = true;
 
-		// 3. 장애물 및 밀기 판정 (Chain check)
+		// 3. 장애물 및 밀기 판정
 		while (true)
 		{
 			std::vector<GameObject*> targets = GridManager::GetObjectsAt(checkGrid);
-			if (targets.empty()) break; // 빈 공간이면 이동 가능
+			if (targets.empty()) break; 
 
 			bool hasStop = false;
 			bool hasPush = false;
@@ -99,74 +83,105 @@ namespace yuzinna
 			for (GameObject* target : targets)
 			{
 				eWordType targetType = RuleManager::GetTypeByName(target->GetName());
-				bool isWord = (target->GetComponent<Word>() != nullptr);
-
-				// STOP 속성이 하나라도 있으면 못 감
-				if (RuleManager::HasRule(targetType, eWordType::Stop))
-					hasStop = true;
-				
-				// PUSH 속성이나 단어 블록이면 밀기 리스트에 추가
-				if (RuleManager::HasRule(targetType, eWordType::Push) || isWord)
+				if (RuleManager::HasRule(targetType, eWordType::Stop)) hasStop = true;
+				if (RuleManager::HasRule(targetType, eWordType::Push) || target->GetComponent<Word>())
 				{
 					hasPush = true;
 					pushTarget = target;
 				}
 			}
 
-			if (hasStop)
-			{
-				canMove = false;
-				break;
-			}
-
-			if (hasPush && pushTarget)
-			{
-				pushList.push_back(pushTarget);
-				checkGrid += direction; // 다음 칸도 확인
-			}
-			else
-			{
-				// PUSH도 STOP도 아니면 (예: 배경) 통과 가능
-				break;
-			}
+			if (hasStop) { canMove = false; break; }
+			if (hasPush && pushTarget) { pushList.push_back(pushTarget); checkGrid += direction; }
+			else break;
 		}
 
-		// 4. 최종 이동 실행
+		// 4. 이동 실행
 		if (canMove)
 		{
-			// 이동하기 직전에 현재 전체 맵의 상태를 저장 (Undo용)
+			// UndoManager가 내부적으로 중복 저장을 방지함
 			UndoManager::SaveState();
+
+			// 이동이 발생한 모든 그리드 좌표를 저장할 리스트
+			std::vector<math::Vector2> affectedGrids;
 
 			// 뒤에서부터 순서대로 밀기
 			for (int i = (int)pushList.size() - 1; i >= 0; --i)
 			{
 				Vector2 objPos = pushList[i]->GetComponent<Transform>()->GetPosition();
 				Vector2 objGrid(std::round(objPos.x / tileSize.x), std::round(objPos.y / tileSize.y));
-				GridManager::MoveObject(pushList[i], objGrid + direction);
+				Vector2 targetGrid = objGrid + direction;
+
+				GridManager::MoveObject(pushList[i], targetGrid);
+				affectedGrids.push_back(targetGrid); // 밀려난 위치 저장
+			}
+
+			// 애니메이션 처리
+			if (ani)
+			{
+				if (GetOwner()->GetName() == L"Baba")
+				{
+					mVersion = (mVersion + 1) % 4;
+					ani->PlayAnimation(L"Baba" + animDir + L"_" + std::to_wstring(mVersion), true);
+				}
+				else if (GetOwner()->GetName() == L"Skull")
+				{
+					ani->PlayAnimation(L"Skull" + animDir, true);
+				}
 			}
 
 			// 자신 이동
-			mVersion = (mVersion + 1) % 4;
-			ani->PlayAnimation(animName + std::to_wstring(mVersion), true);
 			GridManager::MoveObject(GetOwner(), nextGrid);
+			affectedGrids.push_back(nextGrid); // 내 이동 위치 저장
 
-			// 이동 후 규칙을 즉시 업데이트
+			// 이동 후 규칙 즉시 업데이트
 			RuleManager::UpdateRules();
 
-			// --- 승리 판정 (Win Check) ---
-			auto currentObjects = GridManager::GetObjectsAt(nextGrid);
-			for (GameObject* obj : currentObjects)
+			// --- [개선] SINK 판정 (모든 영향받은 그리드 검사) ---
+			for (const math::Vector2& grid : affectedGrids)
 			{
-				if (obj == GetOwner()) continue;
+				auto objectsAtGrid = GridManager::GetObjectsAt(grid);
+				if (objectsAtGrid.size() < 2) continue; // 겹쳐있지 않으면 스킵
 
-				eWordType objType = RuleManager::GetTypeByName(obj->GetName());
-				if (RuleManager::HasRule(objType, eWordType::Win))
+				bool hasSink = false;
+				for (GameObject* obj : objectsAtGrid)
 				{
-					MessageBox(NULL, L"YOU WIN!", L"Baba Is You", MB_OK);
-					
-					// 다음 스테이지 해금 및 월드맵으로 복귀
-					MapManager::UnlockNextStage();
-					SceneManager::LoadScene(L"StageSelectScene");
+					eWordType type = RuleManager::GetTypeByName(obj->GetName());
+					if (RuleManager::HasRule(type, eWordType::Sink))
+					{
+						hasSink = true;
+						break;
+					}
+				}
+
+				if (hasSink)
+				{
+					// SINK 속성이 있는 칸의 모든 오브젝트 파괴
+					for (GameObject* obj : objectsAtGrid)
+					{
+						object::Destroy(obj);
+					}
+				}
+			}
+
+			// --- 승리 판정 (Win Check) ---
+			// (나 자신이 파괴되었을 수도 있으므로 GetObjectsAt으로 다시 확인)
+			auto currentObjects = GridManager::GetObjectsAt(nextGrid);
+			bool amIDead = true;
+			for (GameObject* obj : currentObjects) { if (obj == GetOwner()) amIDead = false; }
+
+			if (!amIDead)
+			{
+				for (GameObject* obj : currentObjects)
+				{
+					if (obj == GetOwner()) continue;
+					eWordType objType = RuleManager::GetTypeByName(obj->GetName());
+					if (RuleManager::HasRule(objType, eWordType::Win))
+					{
+						MessageBox(NULL, L"YOU WIN!", L"Baba Is You", MB_OK);
+						MapManager::UnlockNextStage();
+						SceneManager::LoadScene(L"StageSelectScene");
+					}
 				}
 			}
 		}

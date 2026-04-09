@@ -33,11 +33,26 @@ namespace yuzinna
 		Resources::Load<graphics::Texture>(L"StopOnWord",  L"..\\Resources\\Baba\\Word\\StopOnWord.png");
 		Resources::Load<graphics::Texture>(L"PushOffWord", L"..\\Resources\\Baba\\Word\\PushOffWord.png");
 		Resources::Load<graphics::Texture>(L"PushOnWord",  L"..\\Resources\\Baba\\Word\\PushOnWord.png");
+		Resources::Load<graphics::Texture>(L"SinkOffWord", L"..\\Resources\\Baba\\Word\\SinkOffWord.png");
+		Resources::Load<graphics::Texture>(L"SinkOnWord",  L"..\\Resources\\Baba\\Word\\SinkOnWord.png");
 		Resources::Load<graphics::Texture>(L"WallOffWord", L"..\\Resources\\Baba\\Word\\WallOffWord.png"); 
 		Resources::Load<graphics::Texture>(L"WallOnWord",  L"..\\Resources\\Baba\\Word\\WallOnWord.png");
 
-		// 깃발 자체 이미지
+		// 추가 단어 (Rock, Key, Skull - On/Off 상태별)
+		Resources::Load<graphics::Texture>(L"RockOffWord", L"..\\Resources\\Baba\\Word\\RockOffWord.png");
+		Resources::Load<graphics::Texture>(L"RockOnWord",  L"..\\Resources\\Baba\\Word\\RockOnWord.png");
+		Resources::Load<graphics::Texture>(L"KeyOffWord",  L"..\\Resources\\Baba\\Word\\KeyOffWord.png");
+		Resources::Load<graphics::Texture>(L"KeyOnWord",   L"..\\Resources\\Baba\\Word\\KeyOnWord.png");
+		Resources::Load<graphics::Texture>(L"SkullOffWord",L"..\\Resources\\Baba\\Word\\SkullOffWord.png");
+		Resources::Load<graphics::Texture>(L"SkullOnWord", L"..\\Resources\\Baba\\Word\\SkullOnWord.png");
+		Resources::Load<graphics::Texture>(L"WaterOffWord",L"..\\Resources\\Baba\\Word\\WaterOffWord.png");
+		Resources::Load<graphics::Texture>(L"WaterOnWord", L"..\\Resources\\Baba\\Word\\WaterOnWord.png");
+
+		// 깃발 및 기타 오브젝트 이미지
 		Resources::Load<graphics::Texture>(L"Flag", L"..\\Resources\\Baba\\Flag.png");
+		Resources::Load<graphics::Texture>(L"Key",  L"..\\Resources\\Baba\\Key.png");
+		Resources::Load<graphics::Texture>(L"Rock", L"..\\Resources\\Baba\\Rock.png");
+		Resources::Load<graphics::Texture>(L"Skull",L"..\\Resources\\Baba\\Skull.png");
 
 		// 월드맵 및 스테이지 아이콘
 		Resources::Load<graphics::Texture>(L"WorldMap", L"..\\Resources\\Baba\\Map\\Map.png");
@@ -56,12 +71,16 @@ namespace yuzinna
 			Resources::Load<graphics::Texture>(clearedKey, clearedPath);
 		}
 
-		// 벽 이미지 (0~15번 비트마스킹용)
+		// 벽 및 물 이미지 (0~15번 비트마스킹용)
 		for (int i = 0; i <= 15; ++i)
 		{
-			std::wstring key = L"Wall_" + std::to_wstring(i);
-			std::wstring path = L"..\\Resources\\Baba\\Wall\\Wall_" + std::to_wstring(i) + L".png";
-			Resources::Load<graphics::Texture>(key, path);
+			std::wstring wallKey = L"Wall_" + std::to_wstring(i);
+			std::wstring wallPath = L"..\\Resources\\Baba\\Wall\\Wall_" + std::to_wstring(i) + L".png";
+			Resources::Load<graphics::Texture>(wallKey, wallPath);
+
+			std::wstring waterKey = L"Water_" + std::to_wstring(i);
+			std::wstring waterPath = L"..\\Resources\\Baba\\Water\\Water_" + std::to_wstring(i) + L".png";
+			Resources::Load<graphics::Texture>(waterKey, waterPath);
 		}
 		}
 

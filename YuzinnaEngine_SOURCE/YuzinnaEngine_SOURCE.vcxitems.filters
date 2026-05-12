@@ -43,9 +43,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaResource.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaResources.cpp">
-      <Filter>Resources</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
@@ -87,6 +84,21 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaGridManager.cpp">
       <Filter>Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaFmod.cpp">
+      <Filter>FMod</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaAudioClip.cpp">
+      <Filter>Resources\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaResources.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaAudioListener.cpp">
+      <Filter>Components\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaAudioSource.cpp">
+      <Filter>Components\Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -138,9 +150,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaResource.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaResources.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaRenderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
@@ -182,6 +191,21 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaGridManager.h">
       <Filter>Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaFmod.h">
+      <Filter>FMod</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaAudioClip.h">
+      <Filter>Resources\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaResources.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaAudioListener.h">
+      <Filter>Components\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaAudioSource.h">
+      <Filter>Components\Audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -250,6 +274,15 @@
     </Filter>
     <Filter Include="Grid">
       <UniqueIdentifier>{6962b407-b097-451f-8116-e8c003fe8395}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FMod">
+      <UniqueIdentifier>{5d7a2ddc-c736-4845-8003-f2d2f8f75d5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Audio">
+      <UniqueIdentifier>{f64869fd-d520-44ef-8386-cdbf8aac44f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Audio">
+      <UniqueIdentifier>{3655cb86-5859-4147-bb84-5ede8d888f2f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

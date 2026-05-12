@@ -12,6 +12,8 @@ namespace yuzinna
 			SpriteRenderer,
 			Animator,
 			Camera,
+			AudioListener,
+			AudioSource,
 			End
 		};
 		enum class eLayerType
@@ -42,6 +44,12 @@ namespace yuzinna
 			Circle2D,
 			Rect2D,
 			End
+		};
+		enum class eUIType
+		{
+			HpBar,
+			Button,
+			End,
 		};
 		enum class eWordType
 		{

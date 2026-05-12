@@ -4,6 +4,7 @@
 #include "yuzinnaSceneManager.h"
 #include "yuzinnaResources.h"
 #include "yuzinnaCollisionManager.h"
+#include "yuzinnaFmod.h"
 namespace yuzinna
 {
 
@@ -26,11 +27,10 @@ namespace yuzinna
 	void Application::Initialize(HWND hwnd, UINT width, UINT height)
 	{
 		adjustWidowRect(hwnd, width, height);
-		//HBRUSH backbrush = WHITE_BRUSH;
-
 		createBuffer(width, height);
 		initializeEtc();
 
+		Fmod::Initialize();
 		CollisionManager::Initialize();
 		SceneManager::Initialize();
 
@@ -43,6 +43,7 @@ namespace yuzinna
 		Update();
 		LateUpdate();
 		Render();
+
 		Destroy();
 	}
 
@@ -50,6 +51,7 @@ namespace yuzinna
 	{
 		Input::Update();
 		Time::Update();
+
 		CollisionManager::Update();
 		SceneManager::Update();
 	}
@@ -62,9 +64,8 @@ namespace yuzinna
 
 	void Application::Render()
 	{
-
-
 		clearRenderTarget();
+
 		Time::Render(mBackHdc);
 		CollisionManager::Render(mBackHdc);
 		SceneManager::Render(mBackHdc);
@@ -91,6 +92,7 @@ namespace yuzinna
 
 		//화면 지워주기
 		Rectangle(mBackHdc, -1, -1, mWidth + 1, mHeight + 1);
+
 		(HBRUSH)SelectObject(mBackHdc, oldBrush);
 		DeleteObject(grayBrush);
 	}

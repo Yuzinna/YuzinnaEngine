@@ -18,6 +18,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaAnimation.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaAudioClip.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaAudioListener.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaAudioSource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaBoxCollider2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaCircleCollider2D.h" />
@@ -27,6 +30,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaDontDestroyOnLoad.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaEnums.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaFmod.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaGridManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaInput.h" />
@@ -50,6 +54,9 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaAnimation.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaAudioClip.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaAudioListener.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaAudioSource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaBoxCollider2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaCircleCollider2D.cpp" />
@@ -58,6 +65,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaDontDestroyOnLoad.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaEntity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaFmod.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaGridManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaInput.cpp" />

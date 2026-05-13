@@ -43,7 +43,41 @@ namespace yuzinna
 			T* comp = new T();
 			comp->SetOwner(this);
 			comp->Initialize();
-
+			enums::eComponentType type = comp->GetType();
+			switch (type)
+			{
+			case yuzinna::enums::eComponentType::Transform:
+				comp->SetName(L"Transform");
+				break;
+			case yuzinna::enums::eComponentType::Collider:
+				comp->SetName(L"Collider");
+				break;
+			case yuzinna::enums::eComponentType::Rigidbody:
+				comp->SetName(L"Rigidbody");
+				break;
+			case yuzinna::enums::eComponentType::Script:
+				comp->SetName(L"Script");
+				break;
+			case yuzinna::enums::eComponentType::SpriteRenderer:
+				comp->SetName(L"SpriteRenderer");
+				break;
+			case yuzinna::enums::eComponentType::Animator:
+				comp->SetName(L"Animator");
+				break;
+			case yuzinna::enums::eComponentType::Camera:
+				comp->SetName(L"Camera");
+				break;
+			case yuzinna::enums::eComponentType::AudioListener:
+				comp->SetName(L"AudioListener");
+				break;
+			case yuzinna::enums::eComponentType::AudioSource:
+				comp->SetName(L"AudioSource");
+				break;
+			case yuzinna::enums::eComponentType::End:
+				break;
+			default:
+				break;
+			}
 			// 타입별 인덱스 대신 벡터에 순차적으로 추가하여 여러 컴포넌트(스크립트) 허용
 			mComponents.push_back(comp);
 

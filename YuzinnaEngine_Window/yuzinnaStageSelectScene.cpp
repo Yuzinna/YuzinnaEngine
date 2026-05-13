@@ -9,6 +9,9 @@
 #include "yuzinnaCamera.h"
 #include "yuzinnaRenderer.h"
 #include "yuzinnaMapManager.h"
+#include "yuzinnaAudioListener.h"
+#include "yuzinnaAudioSource.h"
+#include "yuzinnaAudioClip.h"
 
 namespace yuzinna
 {
@@ -26,7 +29,26 @@ namespace yuzinna
 		// 1. 카메라 설정
 		GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::Camera, Vector2(396.0f, 216.0f));
 		Camera* cameraComp = camera->AddComponent<Camera>();
+		camera->AddComponent<AudioListener>();
 		renderer::mainCamera = cameraComp;
+
+		//BGM 재생용 전용 객체 생성
+		GameObject* bgmPlayer = new GameObject();
+		bgmPlayer->SetName(L"StageSelectBGMPlayer");
+
+		// 3. AudioSource 설정
+		AudioSource* audioSource = bgmPlayer->AddComponent<AudioSource>();
+		AudioClip* clip = Resources::Find<AudioClip>(L"MainBGM");
+
+		if (clip != nullptr)
+		{
+			audioSource->SetClip(clip); // 로드한 클립 할당
+			audioSource->SetLoop(true); // 반복 재생 설정
+			audioSource->Play();        // 재생 시작
+		}
+
+		// 씬에 객체 등록
+		AddGameObject(bgmPlayer,enums::eLayerType::None);
 
 		// 2. 월드맵 배경
 		GameObject* bg = object::Instantiate<GameObject>(enums::eLayerType::BackGround, Vector2(396.0f, 216.0f));

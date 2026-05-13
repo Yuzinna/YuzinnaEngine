@@ -1,6 +1,7 @@
 #pragma once
 #include "..\\YuzinnaEngine_SOURCE\\yuzinnaResources.h"
 #include "..\\YuzinnaEngine_SOURCE\\yuzinnaTexture.h"
+#include "..\\YuzinnaEngine_SOURCE\\yuzinnaAudioClip.h"
 
 namespace yuzinna
 {
@@ -57,6 +58,9 @@ namespace yuzinna
 		// 월드맵 및 스테이지 아이콘
 		Resources::Load<graphics::Texture>(L"WorldMap", L"..\\Resources\\Baba\\Map\\Map.png");
 		Resources::Load<graphics::Texture>(L"WorldCursor", L"..\\Resources\\Baba\\Map\\Cursor.png");
+
+		//사운드
+		Resources::Load<AudioClip>(L"MainBGM", L"..\\Resources\\Audio\\BGM\\main_theme.mp3");
 
 		for (int i = 0; i <= 5; ++i)
 		{

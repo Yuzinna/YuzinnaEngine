@@ -52,8 +52,10 @@
       <Filter>baba</Filter>
     </ClInclude>
     <ClInclude Include="yuzinnaMapManager.h" />
-    <ClInclude Include="yuzinnaStageSelectScene.h" />
     <ClInclude Include="yuzinnaWorldMapScript.h" />
+    <ClInclude Include="yuzinnaStageSelectScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yuzinnaPlayScene.cpp">
@@ -101,8 +103,10 @@
       <Filter>baba</Filter>
     </ClCompile>
     <ClCompile Include="yuzinnaMapManager.cpp" />
-    <ClCompile Include="yuzinnaStageSelectScene.cpp" />
     <ClCompile Include="yuzinnaWorldMapScript.cpp" />
+    <ClCompile Include="yuzinnaStageSelectScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">

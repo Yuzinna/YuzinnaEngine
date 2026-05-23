@@ -100,6 +100,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaAudioSource.cpp">
       <Filter>Components\Audio</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaAudioManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -207,6 +208,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaAudioSource.h">
       <Filter>Components\Audio</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaAudioManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Commons">

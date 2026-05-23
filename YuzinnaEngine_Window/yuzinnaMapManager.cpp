@@ -9,7 +9,7 @@ namespace yuzinna
 	void MapManager::Initialize()
 	{
 		// [Stage 0]
-		mMaps[0] = {
+		mMaps[6] = {
 			L"biy..........fiw",
 			L"................",
 			L"WWWWWWWWWWWWWWWW",
@@ -77,9 +77,60 @@ namespace yuzinna
 			L"....WWWWWWWWWWWWWW",
 			
 		};
+		mMaps[4] = {
+			L"fiw...................",
+			L"biy...................",
+			L"......................",
+			L".............SSSSSSSSS",
+			L".............S.......S",
+			L"..rip........S.u.....S",
+			L".............S.i.....S",
+			L".....S.S.....S.d.....S",
+			L".....SRS.....S.......S",
+			L"...SSSRSSS...S.......S",
+			L"...S..R..S...S....F..S",
+			L"...S.....S...S.......S",
+			L"...S..B..S...SSSSSSSSS",
+			L"...S.....S............",
+			
+		};
+		mMaps[5] = {
+			L"......................",
+			L"......................",
+			L"..WWWWWWWWWWWWWW......",
+			L"..W....R.......W......",
+			L"..W.biy......F.W......",
+			L"..WR......R....W......",
+			L"..W........R.R.W......",
+			L"..W...B..R..R.RW.....r",
+			L"..WR.....R.f.w.W.....i",
+			L"..W.R....R..R..W.....s",
+			L"..W....R..R....W......",
+			L"..WWWWWWWWWWWWWW......",
+			L"......................",
+			L"......................",
+			
+		};
+		mMaps[0] = {
+			L".WWWWW.......WWWWW....",
+			L".WbiyW.......WeisW....",
+			L".WWWWW.......WWWWW....",
+			L".WaisW.......WeihW....",
+			L".WWWWWWW....WWWWWWW...",
+			L".W.....W....W.....W...",
+			L".W.K.B.D.RK.D..r..W...",
+			L".W.....W....W.....W...",
+			L".WWWWWWW....WWWDWWW...",
+			L"............W....W....",
+			L".....kio....W..F.W....",
+			L".....i......WW...W....",
+			L".....p.......WfiwW....",
+			L".............WWWWW....",
+			
+		};
 
 		// [Stage 1~5] (임시 데이터 추가)
-		for (int i = 4; i <= 5; ++i)
+		for (int i = 7; i <= 7; ++i)
 		{
 			mMaps[i] = mMaps[0];
 		}

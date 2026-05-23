@@ -44,7 +44,7 @@ namespace yuzinna
 
 	GameObject* ObjectFactory::CreateWord(enums::eWordType type, math::Vector2 gridPos)
 	{
-		GameObject* word = object::Instantiate<GameObject>(enums::eLayerType::Tile);
+		GameObject* word = object::Instantiate<GameObject>(enums::eLayerType::Word);
 		word->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
 		word->AddComponent<SpriteRenderer>();
 
@@ -99,6 +99,11 @@ namespace yuzinna
 			offKey = L"SinkOffWord";
 			onKey = L"SinkOnWord";
 			break;
+		case enums::eWordType::Defeat:
+			name = L"DefeatWord";
+			offKey = L"DefeatOffWord";
+			onKey = L"DefeatOnWord";
+			break;
 		case enums::eWordType::Wall:
 			name = L"WallWord";
 			offKey = L"WallOffWord";
@@ -128,6 +133,21 @@ namespace yuzinna
 			name = L"WaterWord";
 			offKey = L"WaterOffWord";
 			onKey = L"WaterOnWord";
+			break;
+		case enums::eWordType::Door:
+			name = L"DoorWord";
+			offKey = L"DoorOffWord";
+			onKey = L"DoorOnWord";
+			break;
+		case enums::eWordType::Open:
+			name = L"OpenWord";
+			offKey = L"OpenOffWord";
+			onKey = L"OpenOnWord";
+			break;
+		case enums::eWordType::Shut:
+			name = L"ShutWord";
+			offKey = L"ShutOffWord";
+			onKey = L"ShutOnWord";
 			break;
 		default:
 			name = L"UnknownWord";
@@ -205,6 +225,11 @@ namespace yuzinna
 
 		GridManager::MoveObject(skull, gridPos);
 		return skull;
+		}
+
+		GameObject* ObjectFactory::CreateDoor(math::Vector2 gridPos)
+		{
+		return CreateNounObject(L"Door", L"Door", gridPos);
 		}
 
 		GameObject* ObjectFactory::CreateWater(math::Vector2 gridPos, const std::wstring& texKey)

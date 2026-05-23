@@ -20,6 +20,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaAnimation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaAudioClip.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaAudioListener.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaAudioManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaAudioSource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaBoxCollider2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)yuzinnaCamera.h" />
@@ -56,6 +57,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaAnimation.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaAudioClip.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaAudioListener.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaAudioManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaAudioSource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaBoxCollider2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)yuzinnaCamera.cpp" />

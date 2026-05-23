@@ -25,6 +25,7 @@ namespace yuzinna
 			Player,
 			Floor,
 			Particle,
+			Word,
 			Camera,
 			UI,
 			End,
@@ -54,9 +55,9 @@ namespace yuzinna
 		enum class eWordType
 		{
 			None,
-			Baba, Rock, Wall, Flag, Key, Skull, Water, // 명사 (Noun)
+			Baba, Rock, Wall, Flag, Key, Skull, Water, Door, // 명사 (Noun)
 			Is,                                        // 연결자 (Verb)
-			You, Push, Stop, Win, Sink,            // 속성 (Property)
+			You, Push, Stop, Win, Sink, Defeat, Open, Shut,            // 속성 (Property)
 			End
 			};
 		}

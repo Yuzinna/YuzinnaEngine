@@ -19,6 +19,8 @@ namespace yuzinna
 
 	private:
 		int mVersion;
+		float mWinTimer;
+		bool mbWin;
 	};
 
 }

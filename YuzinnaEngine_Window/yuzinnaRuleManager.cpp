@@ -6,12 +6,14 @@
 #include "..\\YuzinnaEngine_SOURCE\\yuzinnaGridManager.h"
 #include "..\\YuzinnaEngine_SOURCE\\yuzinnaTransform.h"
 #include "..\\YuzinnaEngine_SOURCE\\yuzinnaTilemapRenderer.h"
+#include "..\\YuzinnaEngine_SOURCE\\yuzinnaAudioManager.h"
 namespace yuzinna
 {
 	std::vector<Rule> RuleManager::mRules = {};
 
 	void RuleManager::UpdateRules()
 	{
+		std::vector<Rule> prevRules = mRules;
 		mRules.clear();
 
 		// 1. 모든 Word 컴포넌트 비활성화
@@ -101,6 +103,7 @@ namespace yuzinna
 		}
 
 		// 3. --- [추가] YOU 속성 오브젝트 레이어 우선순위 조정 ---
+		int youCount = 0;
 		for (int i = 0; i < (int)eLayerType::Max; ++i)
 		{
 			if ((eLayerType)i == eLayerType::Camera || (eLayerType)i == eLayerType::UI) continue;
@@ -114,10 +117,13 @@ namespace yuzinna
 
 			for (GameObject* obj : copyObjs)
 			{
+				if (obj->IsDead()) continue; // 파괴된 오브젝트는 제외
 				if (obj->GetComponent<Word>()) continue; // 단어 블록은 제외
 
 				eWordType type = GetTypeByName(obj->GetName());
 				bool isYou = HasRule(type, eWordType::You);
+
+				if (isYou) youCount++;
 
 				// YOU이면 Player 레이어로, 아니면 Tile 레이어로 이동 (필요 시에만)
 				if (isYou && obj->GetLayerType() != eLayerType::Player)
@@ -129,6 +135,47 @@ namespace yuzinna
 					activeScene->MoveGameObjectLayer(obj, eLayerType::Tile);
 				}
 			}
+		}
+
+		// --- YOU가 없으면 BGM 정지, 다시 생기면 재생 (PlayScene 전용) ---
+		if (activeScene->GetName() == L"PlayScene")
+		{
+			if (youCount == 0)
+			{
+				AudioManager::StopBGM();
+			}
+			else if (youCount > 0 && !AudioManager::IsBGMPlaying())
+			{
+				AudioManager::PlayBGM(L"StageBGM", 0.2f);
+			}
+		}
+
+		// 4. 새로운 규칙이 형성되었을 때만 효과음 재생
+		bool ruleAdded = false;
+		for (const auto& currentRule : mRules)
+		{
+			bool found = false;
+			for (const auto& prevRule : prevRules)
+			{
+				if (currentRule.noun == prevRule.noun &&
+					currentRule.verb == prevRule.verb &&
+					currentRule.target == prevRule.target)
+				{
+					found = true;
+					break;
+				}
+			}
+
+			if (!found)
+			{
+				ruleAdded = true;
+				break;
+			}
+		}
+
+		if (ruleAdded)
+		{
+			AudioManager::PlaySFX(L"SentenceCompleteSFX");
 		}
 	}
 
@@ -147,14 +194,15 @@ namespace yuzinna
 		return (type == eWordType::Baba || type == eWordType::Rock ||
 			type == eWordType::Wall || type == eWordType::Flag ||
 			type == eWordType::Key || type == eWordType::Skull ||
-			type == eWordType::Water);
+			type == eWordType::Water || type == eWordType::Door);
 	}
 
 	bool RuleManager::IsProperty(eWordType type)
 	{
 		return (type == eWordType::You || type == eWordType::Push ||
 			type == eWordType::Stop || type == eWordType::Win ||
-			type == eWordType::Sink);
+			type == eWordType::Sink || type == eWordType::Defeat ||
+			type == eWordType::Open || type == eWordType::Shut);
 	}
 
 	eWordType RuleManager::GetTypeByName(const std::wstring& name)
@@ -166,6 +214,7 @@ namespace yuzinna
 		if (name == L"Key")  return eWordType::Key;
 		if (name == L"Skull") return eWordType::Skull;
 		if (name == L"Water") return eWordType::Water;
+		if (name == L"Door")  return eWordType::Door;
 
 		return eWordType::None;
 	}

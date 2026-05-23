@@ -9,12 +9,16 @@
 #include "yuzinnaWord.h"
 #include "yuzinnaUndoManager.h"
 #include "yuzinnaMapManager.h"
+#include "yuzinnaAudioManager.h"
+#include "yuzinnaTime.h"
 #include "..\\YuzinnaEngine_SOURCE\\yuzinnaSceneManager.h"
 
 namespace yuzinna
 {
 	BabaScript::BabaScript()
 		: mVersion(0)
+		, mWinTimer(0.0f)
+		, mbWin(false)
 	{
 	}
 
@@ -28,17 +32,28 @@ namespace yuzinna
 
 	void BabaScript::Update()
 	{
-		// 1. 내가 현재 'YOU'인지 확인 (어떤 오브젝트든 상관없이 규칙에 따름)
+		// --- 승리 연출 중이면 대기 ---
+		if (mbWin)
+		{
+			mWinTimer += Time::DeltaTime();
+			if (mWinTimer >= 2.0f) // 2초 후 씬 전환
+			{
+				SceneManager::LoadScene(L"StageSelectScene");
+			}
+			return;
+		}
+
+		// 1. 내가 현재 'YOU'인지 확인
 		eWordType myType = RuleManager::GetTypeByName(GetOwner()->GetName());
 		bool isYou = RuleManager::HasRule(myType, eWordType::You);
 		bool isWin = RuleManager::HasRule(myType, eWordType::Win);
 
-		// --- [추가] YOU이자 WIN인 경우 즉시 승리 ---
+		// --- YOU이자 WIN인 경우 승리 연출 시작 ---
 		if (isYou && isWin)
 		{
-			MessageBox(NULL, L"YOU IS WIN!", L"Baba Is You", MB_OK);
+			mbWin = true;
 			MapManager::UnlockNextStage();
-			SceneManager::LoadScene(L"StageSelectScene");
+			AudioManager::PlaySFX(L"WinSFX");
 			return;
 		}
 
@@ -48,14 +63,14 @@ namespace yuzinna
 		Animator* ani = GetOwner()->GetComponent<Animator>();
 		if (tr == nullptr) return;
 
-		// 입력 감지 (모든 YOU 오브젝트가 동일한 프레임에 입력을 받음)
+		// 입력 감지
 		math::Vector2 pos = tr->GetPosition();
 		math::Vector2 tileSize = TilemapRenderer::TileSize;
 		if (tileSize.x <= 0 || tileSize.y <= 0) tileSize = math::Vector2(48.0f, 48.0f);
 
 		math::Vector2 currentGrid(std::round(pos.x / tileSize.x), std::round(pos.y / tileSize.y));
 		math::Vector2 nextGrid = currentGrid;
-		std::wstring animPrefix = GetOwner()->GetName(); // 이름에 따른 애니메이션 처리 (Baba, Wall 등)
+		std::wstring animPrefix = GetOwner()->GetName(); 
 		std::wstring animDir = L"";
 
 		if (Input::GetKeyDown(eKeyCode::D)) { nextGrid.x += 1.0f; animDir = L"Right"; }
@@ -80,11 +95,35 @@ namespace yuzinna
 			bool hasPush = false;
 			GameObject* pushTarget = nullptr;
 
+			// --- [수정] 충돌/상호작용 판정 상세화 ---
 			for (GameObject* target : targets)
 			{
 				eWordType targetType = RuleManager::GetTypeByName(target->GetName());
-				if (RuleManager::HasRule(targetType, eWordType::Stop)) hasStop = true;
-				if (RuleManager::HasRule(targetType, eWordType::Push) || target->GetComponent<Word>())
+				bool isStop = RuleManager::HasRule(targetType, eWordType::Stop);
+				bool isPush = RuleManager::HasRule(targetType, eWordType::Push) || target->GetComponent<Word>();
+				bool isSink = RuleManager::HasRule(targetType, eWordType::Sink);
+				bool isShut = RuleManager::HasRule(targetType, eWordType::Shut);
+				bool isOpen = RuleManager::HasRule(targetType, eWordType::Open);
+
+				// 현재 이동하려는 객체(또는 밀리고 있는 객체)의 속성 확인
+				GameObject* movingObj = pushList.empty() ? GetOwner() : pushList.back();
+				eWordType movingType = RuleManager::GetTypeByName(movingObj->GetName());
+				bool movingIsSink = RuleManager::HasRule(movingType, eWordType::Sink);
+				bool movingIsOpen = RuleManager::HasRule(movingType, eWordType::Open);
+				bool movingIsShut = RuleManager::HasRule(movingType, eWordType::Shut);
+
+				// 상호작용 파괴가 일어나는지 확인 (SINK 혹은 OPEN/SHUT 쌍)
+				bool willDestroy = (isSink || movingIsSink);
+				if (!willDestroy)
+				{
+					if ((isOpen && movingIsShut) || (isShut && movingIsOpen))
+						willDestroy = true;
+				}
+
+				// STOP이지만 파괴될 운명이라면 통과 허용
+				if (isStop && !willDestroy) hasStop = true;
+
+				if (isPush)
 				{
 					hasPush = true;
 					pushTarget = target;
@@ -99,13 +138,17 @@ namespace yuzinna
 		// 4. 이동 실행
 		if (canMove)
 		{
-			// UndoManager가 내부적으로 중복 저장을 방지함
 			UndoManager::SaveState();
 
-			// 이동이 발생한 모든 그리드 좌표를 저장할 리스트
+			static float lastPlayTime = -1.0f;
+			if (lastPlayTime != Time::DeltaTime())
+			{
+				AudioManager::PlaySFX(L"MoveSFX");
+				lastPlayTime = Time::DeltaTime();
+			}
+
 			std::vector<math::Vector2> affectedGrids;
 
-			// 뒤에서부터 순서대로 밀기
 			for (int i = (int)pushList.size() - 1; i >= 0; --i)
 			{
 				Vector2 objPos = pushList[i]->GetComponent<Transform>()->GetPosition();
@@ -113,10 +156,9 @@ namespace yuzinna
 				Vector2 targetGrid = objGrid + direction;
 
 				GridManager::MoveObject(pushList[i], targetGrid);
-				affectedGrids.push_back(targetGrid); // 밀려난 위치 저장
+				affectedGrids.push_back(targetGrid);
 			}
 
-			// 애니메이션 처리
 			if (ani)
 			{
 				if (GetOwner()->GetName() == L"Baba")
@@ -130,42 +172,101 @@ namespace yuzinna
 				}
 			}
 
-			// 자신 이동
 			GridManager::MoveObject(GetOwner(), nextGrid);
-			affectedGrids.push_back(nextGrid); // 내 이동 위치 저장
+			affectedGrids.push_back(nextGrid);
 
-			// 이동 후 규칙 즉시 업데이트
 			RuleManager::UpdateRules();
 
-			// --- [개선] SINK 판정 (모든 영향받은 그리드 검사) ---
+			// SINK, DEFEAT, OPEN/SHUT 판정
 			for (const math::Vector2& grid : affectedGrids)
 			{
 				auto objectsAtGrid = GridManager::GetObjectsAt(grid);
-				if (objectsAtGrid.size() < 2) continue; // 겹쳐있지 않으면 스킵
+				if (objectsAtGrid.empty()) continue;
 
+				// 1. SINK 판정 (가장 강력함: 모든 것을 파괴)
 				bool hasSink = false;
 				for (GameObject* obj : objectsAtGrid)
 				{
 					eWordType type = RuleManager::GetTypeByName(obj->GetName());
-					if (RuleManager::HasRule(type, eWordType::Sink))
+					if (RuleManager::HasRule(type, enums::eWordType::Sink)) { hasSink = true; break; }
+				}
+
+				if (hasSink && objectsAtGrid.size() >= 2)
+				{
+					AudioManager::PlaySFX(L"DeathSFX");
+					for (GameObject* obj : objectsAtGrid) object::Destroy(obj);
+					continue; // 칸 전멸 시 다음 칸으로
+				}
+
+				// 2. DEFEAT 판정
+				bool hasDefeat = false;
+				for (GameObject* obj : objectsAtGrid)
+				{
+					if (obj->IsDead()) continue;
+					eWordType type = RuleManager::GetTypeByName(obj->GetName());
+					if (RuleManager::HasRule(type, enums::eWordType::Defeat)) { hasDefeat = true; break; }
+				}
+
+				if (hasDefeat)
+				{
+					for (GameObject* obj : objectsAtGrid)
 					{
-						hasSink = true;
-						break;
+						if (obj->IsDead()) continue;
+						eWordType type = RuleManager::GetTypeByName(obj->GetName());
+						if (RuleManager::HasRule(type, enums::eWordType::You))
+						{
+							object::Destroy(obj);
+							AudioManager::PlaySFX(L"DeathSFX");
+						}
 					}
 				}
 
-				if (hasSink)
+				// 3. OPEN / SHUT 판정 (1:1 쌍 파괴)
+				std::vector<GameObject*> openObjs;
+				std::vector<GameObject*> shutObjs;
+				bool somethingOpened = false;
+
+				for (GameObject* obj : objectsAtGrid)
 				{
-					// SINK 속성이 있는 칸의 모든 오브젝트 파괴
-					for (GameObject* obj : objectsAtGrid)
+					if (obj->IsDead()) continue;
+					eWordType type = RuleManager::GetTypeByName(obj->GetName());
+					bool isOpen = RuleManager::HasRule(type, enums::eWordType::Open);
+					bool isShut = RuleManager::HasRule(type, enums::eWordType::Shut);
+
+					// 한 객체가 둘 다 가진 경우 즉시 파괴
+					if (isOpen && isShut)
 					{
 						object::Destroy(obj);
+						somethingOpened = true;
+						continue;
 					}
+
+					if (isOpen) openObjs.push_back(obj);
+					if (isShut) shutObjs.push_back(obj);
+				}
+
+				// 1:1 쌍으로 제거
+				size_t pairCount = min(openObjs.size(), shutObjs.size());
+				if (pairCount > 0)
+				{
+					somethingOpened = true;
+					for (size_t i = 0; i < pairCount; ++i)
+					{
+						object::Destroy(openObjs[i]);
+						object::Destroy(shutObjs[i]);
+					}
+				}
+
+				if (somethingOpened)
+				{
+					AudioManager::PlaySFX(L"OpenSFX");
 				}
 			}
 
-			// --- 승리 판정 (Win Check) ---
-			// (나 자신이 파괴되었을 수도 있으므로 GetObjectsAt으로 다시 확인)
+			// 파괴된 결과를 반영하여 규칙(BGM 정지 등) 재업데이트
+			RuleManager::UpdateRules();
+
+			// 승리 판정
 			auto currentObjects = GridManager::GetObjectsAt(nextGrid);
 			bool amIDead = true;
 			for (GameObject* obj : currentObjects) { if (obj == GetOwner()) amIDead = false; }
@@ -178,9 +279,11 @@ namespace yuzinna
 					eWordType objType = RuleManager::GetTypeByName(obj->GetName());
 					if (RuleManager::HasRule(objType, eWordType::Win))
 					{
-						MessageBox(NULL, L"YOU WIN!", L"Baba Is You", MB_OK);
+						mbWin = true;
 						MapManager::UnlockNextStage();
-						SceneManager::LoadScene(L"StageSelectScene");
+						AudioManager::StopBGM();
+						AudioManager::PlaySFX(L"WinSFX");
+						return;
 					}
 				}
 			}
@@ -193,5 +296,40 @@ namespace yuzinna
 
 	void BabaScript::Render(HDC hdc)
 	{
+		if (mbWin)
+		{
+			// 1. 화면 중앙 계산 (대략적인 윈도우 크기 1600x900 기준, 필요시 조정)
+			// 실제 윈도우 크기를 정확히 가져오려면 GetClientRect 등을 쓸 수 있지만 
+			// 여기선 중앙 근처에 고정 위치로 그립니다.
+			int boxWidth = 400;
+			int boxHeight = 200;
+			int centerX = 800; // 화면 중앙 X
+			int centerY = 450; // 화면 중앙 Y
+
+			int left = centerX - (boxWidth / 2);
+			int top = centerY - (boxHeight / 2);
+			int right = left + boxWidth;
+			int bottom = top + boxHeight;
+
+			// 2. 배경 상자 그리기 (시스템 창 느낌의 회색/흰색 조합)
+			HBRUSH hOldBrush = (HBRUSH)SelectObject(hdc, GetStockObject(WHITE_BRUSH));
+			Rectangle(hdc, left, top, right, bottom);
+
+			// 테두리 강조
+			Rectangle(hdc, left + 5, top + 5, right - 5, bottom - 5);
+
+			// 3. 텍스트 출력
+			std::wstring winText = L"YOU WIN!";
+			
+			// 폰트 설정 (생략 시 기본 폰트)
+			SetBkMode(hdc, TRANSPARENT);
+			SetTextColor(hdc, RGB(0, 0, 0));
+
+			// 텍스트 중앙 정렬 출력
+			RECT rect = { left, top, right, bottom };
+			DrawText(hdc, winText.c_str(), -1, &rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+
+			SelectObject(hdc, hOldBrush);
+		}
 	}
 }

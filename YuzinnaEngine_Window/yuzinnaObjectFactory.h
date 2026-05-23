@@ -18,6 +18,7 @@ namespace yuzinna
 		static GameObject* CreateKey(math::Vector2 gridPos);
 		static GameObject* CreateRock(math::Vector2 gridPos);
 		static GameObject* CreateSkull(math::Vector2 gridPos);
+		static GameObject* CreateDoor(math::Vector2 gridPos);
 		static GameObject* CreateWater(math::Vector2 gridPos, const std::wstring& texKey);
 	};
 }

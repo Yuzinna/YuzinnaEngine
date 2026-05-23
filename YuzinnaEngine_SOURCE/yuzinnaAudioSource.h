@@ -17,14 +17,19 @@ namespace yuzinna
 		void Render(HDC hdc) override;
 
 		void Play();
+		void PlayOneShot(AudioClip* clip);
 		void Stop();
 		void SetLoop(bool loop);
+		void SetSpatialBlend(float blend) { mSpatialBlend = blend; }
 
 		void SetClip(AudioClip* clip) { mAudioClip = clip; }
 		AudioClip* GetClip() { return mAudioClip; }
+		void SetVolume(float volume);
+		bool IsPlaying();
 
 	private:
 		AudioClip* mAudioClip;
+		float mSpatialBlend;
 	};
 }
 

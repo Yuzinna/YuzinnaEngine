@@ -10,8 +10,7 @@
 #include "yuzinnaRenderer.h"
 #include "yuzinnaMapManager.h"
 #include "yuzinnaAudioListener.h"
-#include "yuzinnaAudioSource.h"
-#include "yuzinnaAudioClip.h"
+#include "yuzinnaAudioManager.h"
 
 namespace yuzinna
 {
@@ -31,24 +30,6 @@ namespace yuzinna
 		Camera* cameraComp = camera->AddComponent<Camera>();
 		camera->AddComponent<AudioListener>();
 		renderer::mainCamera = cameraComp;
-
-		//BGM 재생용 전용 객체 생성
-		GameObject* bgmPlayer = new GameObject();
-		bgmPlayer->SetName(L"StageSelectBGMPlayer");
-
-		// 3. AudioSource 설정
-		AudioSource* audioSource = bgmPlayer->AddComponent<AudioSource>();
-		AudioClip* clip = Resources::Find<AudioClip>(L"MainBGM");
-
-		if (clip != nullptr)
-		{
-			audioSource->SetClip(clip); // 로드한 클립 할당
-			audioSource->SetLoop(true); // 반복 재생 설정
-			audioSource->Play();        // 재생 시작
-		}
-
-		// 씬에 객체 등록
-		AddGameObject(bgmPlayer,enums::eLayerType::None);
 
 		// 2. 월드맵 배경
 		GameObject* bg = object::Instantiate<GameObject>(enums::eLayerType::BackGround, Vector2(396.0f, 216.0f));
@@ -76,6 +57,9 @@ namespace yuzinna
 	{
 		Scene::OnEnter();
 
+		// AudioManager를 통해 전역 BGM 재생
+		AudioManager::PlayBGM(L"MainBGM", 0.2f);
+
 		// 씬에 들어올 때마다 해금된 스테이지를 다시 체크하여 생성합니다.
 		struct Pos { int x, y; };
 		static std::vector<Pos> stageCoords = {
@@ -84,22 +68,16 @@ namespace yuzinna
 
 		int maxStage = MapManager::GetMaxUnlockedStage();
 		
-		// Tile 레이어(스테이지 아이콘들이 있는 레이어)를 뒤져서 
-		// 이미 생성된 스테이지가 있는지 확인하고, 없는 스테이지를 추가로 만듭니다.
 		for (int i = 0; i <= maxStage; ++i)
 		{
 			if (i >= stageCoords.size()) break;
 
-			// 해당 스테이지 번호의 아이콘이 이미 존재하는지 이름이나 속성으로 체크할 수 있지만,
-			// 가장 간단하게는 mCursorScript의 mStages에 이미 등록되어 있는지 확인하면 됩니다.
-			// (mStages에 해당 스테이지가 없으면 새로 생성)
 			if (mCursorScript && !mCursorScript->HasStage(i))
 			{
 				CreateStageIcon(i, stageCoords[i].x, stageCoords[i].y);
 			}
 		}
 
-		// 현재 진행 중인 스테이지 위치로 커서 이동
 		if (mCursorScript)
 		{
 			mCursorScript->SetToStage(MapManager::GetCurrentStage());
@@ -140,6 +118,9 @@ namespace yuzinna
 	}
 	void StageSelectScene::OnExit()
 	{
+		// 다음 씬으로 넘어가기 전 현재 BGM 정지
+		AudioManager::StopBGM();
+
 		Scene::OnExit();
 	}
 }

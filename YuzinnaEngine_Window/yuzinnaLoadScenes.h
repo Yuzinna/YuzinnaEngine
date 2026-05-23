@@ -15,7 +15,7 @@ namespace yuzinna
 
 		SceneManager::CreateScene<PlayScene>(L"PlayScene");
 		SceneManager::CreateScene<StageSelectScene>(L"StageSelectScene");
-
+		Scene* acScene = SceneManager::GetActiveScene();
 		SceneManager::LoadScene(L"StageSelectScene");
 	}
 }

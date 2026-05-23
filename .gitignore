@@ -361,3 +361,16 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+# --------------------------------------------------
+# FMOD Libraries Exception (FMOD 라이브러리 강제 포함)
+# --------------------------------------------------
+# Library Folder
+!External/g
+!External/Library/Fmod/Debug/
+!External/Library/Fmod/Release/
+!External/Library/DirectXTex/Debug/
+!External/Library/DirectXTex/Release/
+!External/Library/FW1FontWrapper/Debug/
+!External/Library/FW1FontWrapper/Release/
+!External/Library/Assimp/Debug/
+!External/Library/Assimp/Release/

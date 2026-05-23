@@ -7,15 +7,15 @@ namespace yuzinna
 	class Animator : public Component
 	{
 	public:
-		//�ִϸ��̼� �̺�Ʈ
+		//ִϸ̼ ̺Ʈ
 		struct Event
 		{
-			//��ü�� �Ű��ִ� ����� ����
+			//ü Űִ  
 			void operator =(std::function<void()> func)
 			{
 				mEvent = std::move(func);
 			}
-			//Event����ü�� ������ ����� �� ���� �̸��� ������ ������ function ����(�� �Լ�)�� �ٷ� ȣ���ϱ����� ���۷�����
+			//Eventü     ̸   function ( Լ) ٷ ȣϱ ۷
 			void operator()()
 			{
 				if (mEvent)
@@ -23,7 +23,7 @@ namespace yuzinna
 					mEvent();
 				}
 			}
-			//��ȯ���� void�� �Ű������� ���� ��������Ʈ ����
+			//ȯ void Ű  Ʈ 
 			std::function<void()> mEvent;
 		};
 
@@ -50,7 +50,7 @@ namespace yuzinna
 			, UINT spriteLength
 			, float duration
 			, bool vertical = false);
-		//������ �ִ� �ؽ��������� ���ļ� �ϳ��� �ִϸ��̼� ��Ʈ�� ����� �����ϴ� �Լ�
+		// ִ ؽ ļ ϳ ִϸ̼ Ʈ  ϴ Լ
 		void CreateAnimationByFolder(const std::wstring& name,
 			const std::wstring& path,Vector2 offset, float duration);
 
@@ -67,10 +67,9 @@ namespace yuzinna
 		std::map<std::wstring, Animation*> mAnimations;
 
 		Animation* mActiveAnimation;
-		//�ִϸ��̼��� ������ ���°�
+		//ִϸ̼  °
 		bool mbLoop;
 
 		std::map<std::wstring, Events*> mEvents;
 	};
 }
-

@@ -46,6 +46,10 @@ namespace yuzinna
 					ObjectFactory::CreateSkull(gridPos);
 					break;
 
+				case L'D': // 문 오브젝트
+					ObjectFactory::CreateDoor(gridPos);
+					break;
+
 				case L'W': // 벽 (오토 타일링 적용)
 				{
 					auto IsWall = [&](int x, int y) -> bool {
@@ -129,8 +133,24 @@ namespace yuzinna
 					ObjectFactory::CreateWord(enums::eWordType::Sink, gridPos);
 					break;
 
+				case L'd': // DEFEAT 단어
+					ObjectFactory::CreateWord(enums::eWordType::Defeat, gridPos);
+					break;
+
 				case L't': // WATER 단어
 					ObjectFactory::CreateWord(enums::eWordType::Water, gridPos);
+					break;
+
+				case L'e': // DOOR 단어
+					ObjectFactory::CreateWord(enums::eWordType::Door, gridPos);
+					break;
+
+				case L'o': // OPEN 단어
+					ObjectFactory::CreateWord(enums::eWordType::Open, gridPos);
+					break;
+
+				case L'h': // SHUT 단어
+					ObjectFactory::CreateWord(enums::eWordType::Shut, gridPos);
 					break;
 
 				default:

@@ -3,6 +3,7 @@
 #include "yuzinnaTransform.h"
 #include "yuzinnaGameObject.h"
 #include "yuzinnaMapManager.h"
+#include "yuzinnaAudioManager.h"
 #include "..\\YuzinnaEngine_SOURCE\\yuzinnaSceneManager.h"
 
 namespace yuzinna
@@ -51,6 +52,7 @@ namespace yuzinna
 			// 스테이지가 있는 칸으로만 이동 허용
 			mGridPos = nextGridPos;
 			UpdatePosition();
+			AudioManager::PlaySFX(L"MoveSFX");
 		}
 		// 스테이지가 없는 빈 공간으로는 이동하지 않습니다.
 	}

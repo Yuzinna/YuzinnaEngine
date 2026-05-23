@@ -51,6 +51,7 @@ namespace yuzinna
 	{
 		Input::Update();
 		Time::Update();
+		Fmod::Update();
 
 		CollisionManager::Update();
 		SceneManager::Update();

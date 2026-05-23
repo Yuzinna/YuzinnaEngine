@@ -1,43 +1,35 @@
 #include "yuzinnaDontDestroyOnLoad.h"
 
-namespace yuzinna
-{
-
+namespace yuzinna
+{
 	DontDestroyOnLoad::DontDestroyOnLoad()
 	{
-	}
-
-	DontDestroyOnLoad::~DontDestroyOnLoad()
+	}
+	DontDestroyOnLoad::~DontDestroyOnLoad()
 	{
 	}
-
-	void DontDestroyOnLoad::Initialize()
-	{
-		Scene::Initialize();
+	void DontDestroyOnLoad::Initialize()
+	{
+		Scene::Initialize();
 	}
-
-	void DontDestroyOnLoad::Update()
-	{
-		Scene::Update();
+	void DontDestroyOnLoad::Update()
+	{
+		Scene::Update();
 	}
-
 	void DontDestroyOnLoad::LateUpdate()
 	{
 		Scene::LateUpdate();
 	}
-
-	void DontDestroyOnLoad::Render(HDC hdc)
-	{
-		Scene::Render(hdc);
+	void DontDestroyOnLoad::Render(HDC hdc)
+	{
+		Scene::Render(hdc);
+	}
+	void DontDestroyOnLoad::OnEnter()
+	{
+		Scene::OnEnter();
 	}
-
-	void DontDestroyOnLoad::OnEnter()
-	{
-		Scene::OnEnter();
-	}
-
-	void DontDestroyOnLoad::OnExit()
-	{
-		Scene::OnExit();
+	void DontDestroyOnLoad::OnExit()
+	{
+		Scene::OnExit();
 	}
 }

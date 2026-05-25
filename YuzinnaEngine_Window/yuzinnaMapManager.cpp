@@ -9,7 +9,7 @@ namespace yuzinna
 	void MapManager::Initialize()
 	{
 		// [Stage 0]
-		mMaps[6] = {
+		mMaps[0] = {
 			L"biy..........fiw",
 			L"................",
 			L"WWWWWWWWWWWWWWWW",
@@ -111,7 +111,7 @@ namespace yuzinna
 			L"......................",
 			
 		};
-		mMaps[0] = {
+		mMaps[6] = {
 			L".WWWWW.......WWWWW....",
 			L".WbiyW.......WeisW....",
 			L".WWWWW.......WWWWW....",
@@ -128,12 +128,26 @@ namespace yuzinna
 			L".............WWWWW....",
 			
 		};
-
-		// [Stage 1~5] (임시 데이터 추가)
-		for (int i = 7; i <= 7; ++i)
-		{
-			mMaps[i] = mMaps[0];
-		}
+		mMaps[7] = {
+			L"W.biy.W.........",
+			L"W.eis.W.........",
+			L"W.ais.W.........",
+			L"WWWWWWWWWWWWWWWW",
+			L"W.....W........W",
+			L"W.....W........W",
+			L"W.kio.W........W",
+			L"W.....W...eih..W",
+			L"W.k.p.W........W",
+			L"W.B...D........W",
+			L"W.K...W........W",
+			L"W.....WWWWWDWWWW",
+			L"W.....W.........",
+			L"WWWWWWW....F....",
+			L"................",
+			L"..........fiw...",
+			
+		};
+		
 	}
 
 	std::vector<std::wstring> MapManager::GetMap(int stageNum)
@@ -149,7 +163,7 @@ namespace yuzinna
 		if (mCurrentStage == mMaxUnlockedStage)
 		{
 			mMaxUnlockedStage++;
-			if (mMaxUnlockedStage > 5) mMaxUnlockedStage = 5;
+			if (mMaxUnlockedStage > 8) mMaxUnlockedStage = 8;
 		}
 	}
 }

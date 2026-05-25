@@ -77,8 +77,8 @@ namespace yuzinna
 		Resources::Load<AudioClip>(L"SentenceCompleteSFX", L"..\\Resources\\Audio\\SFX\\completeWord.ogg");
 		Resources::Load<AudioClip>(L"OpenSFX", L"..\\Resources\\Audio\\SFX\\open.ogg");
 
-		// 스테이지 아이콘 로딩 (0~5번)
-		for (int i = 0; i <= 5; ++i)
+		// 스테이지 아이콘 로딩 (0~7번)
+		for (int i = 0; i <= 7; ++i)
 		{
 			std::wstring stageKey = L"StageIcon_" + std::to_wstring(i);
 			std::wstring stagePath = L"..\\Resources\\Baba\\Map\\Stage" + std::to_wstring(i) + L".png";

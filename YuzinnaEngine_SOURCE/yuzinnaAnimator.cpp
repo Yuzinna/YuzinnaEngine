@@ -184,4 +184,23 @@ namespace yuzinna
 		Events* events = FindEvents(name);
 		return events->endEvent.mEvent;
 	}
+
+	void Animator::ClearAnimations()
+	{
+		for (auto& iter : mAnimations)
+		{
+			delete iter.second;
+			iter.second = nullptr;
+		}
+		mAnimations.clear();
+
+		for (auto& iter : mEvents)
+		{
+			delete iter.second;
+			iter.second = nullptr;
+		}
+		mEvents.clear();
+
+		mActiveAnimation = nullptr;
+	}
 }

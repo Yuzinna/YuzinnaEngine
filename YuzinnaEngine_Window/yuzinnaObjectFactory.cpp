@@ -236,4 +236,92 @@ namespace yuzinna
 		{
 		return CreateNounObject(L"Water", texKey, gridPos);
 		}
+
+		GameObject* ObjectFactory::CreateByWordType(enums::eWordType type, math::Vector2 gridPos)
+		{
+			switch (type)
+			{
+			case enums::eWordType::Baba:  return CreateBaba(gridPos);
+			case enums::eWordType::Rock:  return CreateRock(gridPos);
+			case enums::eWordType::Wall:  return CreateNounObject(L"Wall", L"Wall_0", gridPos); // 기본 벽
+			case enums::eWordType::Flag:  return CreateNounObject(L"Flag", L"Flag", gridPos);
+			case enums::eWordType::Key:   return CreateKey(gridPos);
+			case enums::eWordType::Skull: return CreateSkull(gridPos);
+			case enums::eWordType::Water: return CreateWater(gridPos, L"Water_0"); // 기본 물
+			case enums::eWordType::Door:  return CreateDoor(gridPos);
+			default: break;
+			}
+			return nullptr;
+		}
+
+		void ObjectFactory::TransformObject(GameObject* obj, enums::eWordType toType)
+		{
+			if (obj == nullptr) return;
+
+			Animator* ani = obj->GetComponent<Animator>();
+			if (ani == nullptr) return;
+
+			// 기존 애니메이션 모두 제거
+			ani->ClearAnimations();
+
+			std::wstring name = L"";
+			std::wstring texKey = L"";
+
+			switch (toType)
+			{
+			case enums::eWordType::Baba:
+			{
+				name = L"Baba";
+				graphics::Texture* upTex = Resources::Find<graphics::Texture>(L"BabaUp");
+				graphics::Texture* downTex = Resources::Find<graphics::Texture>(L"BabaDown");
+				graphics::Texture* leftTex = Resources::Find<graphics::Texture>(L"BabaLeft");
+				graphics::Texture* rightTex = Resources::Find<graphics::Texture>(L"BabaRight");
+
+				for (int i = 0; i < 4; ++i)
+				{
+					ani->CreateAnimation(L"BabaUp_" + std::to_wstring(i), upTex, Vector2(24.0f * i, 0.0f), Vector2(24, 24), Vector2::Zero, 3, 0.2f, true);
+					ani->CreateAnimation(L"BabaDown_" + std::to_wstring(i), downTex, Vector2(24.0f * i, 0.0f), Vector2(24, 24), Vector2::Zero, 3, 0.2f, true);
+					ani->CreateAnimation(L"BabaLeft_" + std::to_wstring(i), leftTex, Vector2(24.0f * i, 0.0f), Vector2(24, 24), Vector2::Zero, 3, 0.2f, true);
+					ani->CreateAnimation(L"BabaRight_" + std::to_wstring(i), rightTex, Vector2(24.0f * i, 0.0f), Vector2(24, 24), Vector2::Zero, 3, 0.2f, true);
+				}
+				ani->PlayAnimation(L"BabaRight_0", true);
+			}
+			break;
+
+			case enums::eWordType::Skull:
+			{
+				name = L"Skull";
+				graphics::Texture* tex = Resources::Find<graphics::Texture>(L"Skull");
+				if (tex)
+				{
+					ani->CreateAnimation(L"SkullRight", tex, Vector2(0.0f, 0.0f), Vector2(24, 24), Vector2::Zero, 3, 0.2f, true);
+					ani->CreateAnimation(L"SkullUp", tex, Vector2(24.0f, 0.0f), Vector2(24, 24), Vector2::Zero, 3, 0.2f, true);
+					ani->CreateAnimation(L"SkullLeft", tex, Vector2(48.0f, 0.0f), Vector2(24, 24), Vector2::Zero, 3, 0.2f, true);
+					ani->CreateAnimation(L"SkullDown", tex, Vector2(72.0f, 0.0f), Vector2(24, 24), Vector2::Zero, 3, 0.2f, true);
+					ani->PlayAnimation(L"SkullRight", true);
+				}
+			}
+			break;
+
+			case enums::eWordType::Rock:  name = L"Rock"; texKey = L"Rock"; break;
+			case enums::eWordType::Wall:  name = L"Wall"; texKey = L"Wall_0"; break;
+			case enums::eWordType::Flag:  name = L"Flag"; texKey = L"Flag"; break;
+			case enums::eWordType::Key:   name = L"Key";  texKey = L"Key"; break;
+			case enums::eWordType::Water: name = L"Water"; texKey = L"Water_0"; break;
+			case enums::eWordType::Door:  name = L"Door"; texKey = L"Door"; break;
+			default: break;
+			}
+
+			if (!texKey.empty())
+			{
+				graphics::Texture* tex = Resources::Find<graphics::Texture>(texKey);
+				if (tex)
+				{
+					ani->CreateAnimation(L"Idle", tex, Vector2::Zero, Vector2(24, 24), Vector2::Zero, 3, 0.2f, true);
+					ani->PlayAnimation(L"Idle", true);
+				}
+			}
+
+			obj->SetName(name);
+		}
 		}

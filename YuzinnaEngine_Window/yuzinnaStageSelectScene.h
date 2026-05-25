@@ -21,5 +21,6 @@ namespace yuzinna
 		void CreateStageIcon(int stageNum, int gridX, int gridY);
 		
 		class WorldMapScript* mCursorScript;
+		bool mbAllClear;
 	};
 }

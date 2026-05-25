@@ -11,6 +11,7 @@ namespace yuzinna
 	struct ObjectState
 	{
 		GameObject* obj;
+		std::wstring name; // 추가: 오브젝트 이름 (변이 복구용)
 		math::Vector2 gridPos;
 		int version;
 		std::wstring animName; // 추가: 현재 재생 중인 애니메이션 이름

@@ -7,15 +7,15 @@ namespace yuzinna
 	class Animator : public Component
 	{
 	public:
-		//ִϸ̼ ̺Ʈ
+		// 애니메이션 이벤트
 		struct Event
 		{
-			//ü Űִ  
+			// 이벤트 함수 등록
 			void operator =(std::function<void()> func)
 			{
 				mEvent = std::move(func);
 			}
-			//Eventü     ̸   function ( Լ) ٷ ȣϱ ۷
+			// 이벤트 호출
 			void operator()()
 			{
 				if (mEvent)
@@ -23,7 +23,6 @@ namespace yuzinna
 					mEvent();
 				}
 			}
-			//ȯ void Ű  Ʈ 
 			std::function<void()> mEvent;
 		};
 
@@ -50,12 +49,16 @@ namespace yuzinna
 			, UINT spriteLength
 			, float duration
 			, bool vertical = false);
-		// ִ ؽ ļ ϳ ִϸ̼ Ʈ  ϴ Լ
+		
+		// 폴더 경로를 통해 애니메이션을 생성하는 함수
 		void CreateAnimationByFolder(const std::wstring& name,
 			const std::wstring& path,Vector2 offset, float duration);
 
 		Animation* FindAnimation(const std::wstring& name);
 		void PlayAnimation(const std::wstring& name, bool loop = true);
+
+		// [추가] 모든 애니메이션을 삭제합니다.
+		void ClearAnimations();
 
 		Events* FindEvents(const std::wstring& name);
 		std::function<void()>& GetStartEvent(const std::wstring& name);
@@ -67,7 +70,6 @@ namespace yuzinna
 		std::map<std::wstring, Animation*> mAnimations;
 
 		Animation* mActiveAnimation;
-		//ִϸ̼  °
 		bool mbLoop;
 
 		std::map<std::wstring, Events*> mEvents;

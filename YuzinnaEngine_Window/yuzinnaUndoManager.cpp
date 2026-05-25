@@ -9,6 +9,7 @@
 #include "yuzinnaRuleManager.h"
 #include "yuzinnaBabaScript.h"
 #include "..\\YuzinnaEngine_SOURCE\\yuzinnaTilemapRenderer.h"
+#include "yuzinnaObjectFactory.h"
 namespace yuzinna
 {
 	std::stack<std::vector<ObjectState>> UndoManager::mHistory = {};
@@ -59,7 +60,7 @@ namespace yuzinna
 					Animator* ani = obj->GetComponent<Animator>();
 					if (ani) animName = ani->GetActiveAnimationName();
 
-					currentState.push_back({ obj, gridPos, version, animName, obj->GetState() });
+					currentState.push_back({ obj, obj->GetName(), gridPos, version, animName, obj->GetState() });
 				}
 			}
 		}
@@ -86,6 +87,12 @@ namespace yuzinna
 			{
 				// 사실 Undo 시점에 Dead인 것을 굳이 Dead로 바꿀 필요는 없지만 로직상 명시
 				// state.obj->death(); // friend 관계이므로 필요 시 호출 가능
+			}
+
+			// --- [추가] 변이 상태 원복 (이름이 달라졌다면 다시 변환) ---
+			if (state.obj->GetName() != state.name)
+			{
+				ObjectFactory::TransformObject(state.obj, RuleManager::GetTypeByName(state.name));
 			}
 
 			// 오브젝트를 저장된 그리드 위치로 원복

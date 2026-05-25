@@ -7,6 +7,7 @@
 #include "..\\YuzinnaEngine_SOURCE\\yuzinnaTransform.h"
 #include "..\\YuzinnaEngine_SOURCE\\yuzinnaTilemapRenderer.h"
 #include "..\\YuzinnaEngine_SOURCE\\yuzinnaAudioManager.h"
+#include "yuzinnaObjectFactory.h"
 namespace yuzinna
 {
 	std::vector<Rule> RuleManager::mRules = {};
@@ -176,6 +177,61 @@ namespace yuzinna
 		if (ruleAdded)
 		{
 			AudioManager::PlaySFX(L"SentenceCompleteSFX");
+		}
+
+		// 5. --- [추가] Noun IS Noun 변이 로직 ---
+		// (개체 A) IS (개체 B) 규칙이 있고, (개체 A) IS (개체 A)가 없는 경우 변이 실행
+		std::vector<std::pair<eWordType, eWordType>> transformations;
+		for (const auto& rule : mRules)
+		{
+			if (IsNoun(rule.noun) && IsNoun(rule.target) && rule.noun != rule.target)
+			{
+				// (A IS A) 규칙이 있는지 확인
+				if (!HasRule(rule.noun, rule.noun))
+				{
+					transformations.push_back({ rule.noun, rule.target });
+				}
+			}
+		}
+
+		if (!transformations.empty())
+		{
+			bool transformed = false;
+			for (const auto& trans : transformations)
+			{
+				eWordType fromType = trans.first;
+				eWordType toType = trans.second;
+
+				for (int i = 0; i < (int)eLayerType::Max; ++i)
+				{
+					Layer* layer = activeScene->GetLayer((eLayerType)i);
+					if (layer == nullptr || (eLayerType)i == eLayerType::Word) continue;
+
+					const std::vector<GameObject*>& objs = layer->GetGameObjects();
+					std::vector<GameObject*> targets;
+					for (GameObject* obj : objs)
+					{
+						if (obj->IsDead()) continue;
+						if (GetTypeByName(obj->GetName()) == fromType)
+						{
+							targets.push_back(obj);
+						}
+					}
+
+					for (GameObject* target : targets)
+					{
+						// 기존 오브젝트를 새로운 타입으로 변환 (포인터 유지 -> Undo 호환성 확보)
+						ObjectFactory::TransformObject(target, toType);
+						transformed = true;
+					}
+				}
+			}
+
+			if (transformed)
+			{
+				// 변이가 일어났으므로 규칙 재업데이트
+				UpdateRules();
+			}
 		}
 	}
 
